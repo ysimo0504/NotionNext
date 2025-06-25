@@ -19,7 +19,7 @@ const BLOG = {
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://heysimo.com', // 网站地址
   KEYWORDS:
     process.env.NEXT_PUBLIC_KEYWORD ||
-    'Notion, 博客, Simo54, Simo, 程序员, 打工人, 干饭人, 独立开发, dev, ximo, ximo54, 小莫, 小莫54, 小程序, iOS, Android, web, ReactNative, RN, Expo, AI', // 网站关键词 英文逗号隔开
+    '程序员,blog,博客,自媒体,公众号,独立开发,simo54,Simo54,科技,互联网,Programmer,blog, blog, we media, public number, independent development,simo54, simo54, technology, Internet, heysimo,Notion, 博客, Simo54, Simo, 程序员, 打工人, 干饭人, 独立开发, dev, ximo, ximo54, 小莫, 小莫54, 小程序, iOS, Android, web, ReactNative, RN, Expo, AI', // 网站关键词 英文逗号隔开
   BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png
   BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '', // 备案号 闽ICP备XXXXXX
   BEI_AN_LINK: process.env.NEXT_PUBLIC_BEI_AN_LINK || '', // 备案查询链接，如果用了萌备等备案请在这里填写
