@@ -60,7 +60,7 @@ const LayoutBase = props => {
   return (
     <div
       id='theme-starter'
-      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}>
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
       <Style />
       {/* 页头 */}
       <Header {...props} />
@@ -70,10 +70,10 @@ const LayoutBase = props => {
       </div>
 
       {/* 页脚 */}
-      <Footer {...props} />
+      {/* <Footer {...props} /> */}
 
       {/* 悬浮按钮 */}
-      <BackToTopButton />
+      {/* <BackToTopButton /> */}
 
       {/* <MadeWithButton/> */}
     </div>
@@ -93,39 +93,6 @@ const LayoutIndex = props => {
     <>
       {/* 英雄区 */}
       {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
-      {/* 合作伙伴 */}
-      {siteConfig('STARTER_BRANDS_ENABLE', true, CONFIG) && <Brand />}
-      {/* 产品特性 */}
-      {siteConfig('STARTER_FEATURE_ENABLE', true, CONFIG) && <Features />}
-      {/* 关于 */}
-      {siteConfig('STARTER_ABOUT_ENABLE', true, CONFIG) && <About />}
-      {/* 价格 */}
-      {siteConfig('STARTER_PRICING_ENABLE', true, CONFIG) && <Pricing />}
-      {/* 评价展示 */}
-      {siteConfig('STARTER_TESTIMONIALS_ENABLE', true, CONFIG) && (
-        <Testimonials />
-      )}
-      {/* 常见问题 */}
-      {siteConfig('STARTER_FAQ_ENABLE', true, CONFIG) && <FAQ />}
-      {/* 团队介绍 */}
-      {siteConfig('STARTER_TEAM_ENABLE', true, CONFIG) && <Team />}
-      {/* 博文列表 */}
-      {siteConfig('STARTER_BLOG_ENABLE', true, CONFIG) && (
-        <>
-          <Blog posts={posts} />
-          <div className='container mx-auto flex justify-end mb-4'>
-            <Link className='text-lg underline' href={'/archive'}>
-              <span>{locale.COMMON.MORE}</span>
-              <i className='ml-2 fas fa-arrow-right' />
-            </Link>
-          </div>
-        </>
-      )}
-      {/* 联系方式 */}
-      {siteConfig('STARTER_CONTACT_ENABLE', true, CONFIG) && <Contact />}
-
-      {/* 行动呼吁 */}
-      {siteConfig('STARTER_CTA_ENABLE', true, CONFIG) && <CTA />}
     </>
   )
 }
@@ -471,22 +438,7 @@ const LayoutSignIn = props => {
     'STARTER_SIGNIN_DESCRITION',
     '这里是演示页面，NotionNext目前不提供会员登录功能'
   )
-  return (
-    <>
-      <div className='grow mt-20'>
-        <Banner title={title} description={description} />
-        {/* clerk预置表单 */}
-        {enableClerk && (
-          <div className='flex justify-center py-6'>
-            <SignIn />
-          </div>
-        )}
-
-        {/* 自定义登录表单 */}
-        {!enableClerk && <SignInForm />}
-      </div>
-    </>
-  )
+  return <></>
 }
 
 /**
@@ -502,23 +454,7 @@ const LayoutSignUp = props => {
     'STARTER_SIGNIN_DESCRITION',
     '这里是演示页面，NotionNext目前不提供会员注册功能'
   )
-  return (
-    <>
-      <div className='grow mt-20'>
-        <Banner title={title} description={description} />
-
-        {/* clerk预置表单 */}
-        {enableClerk && (
-          <div className='flex justify-center py-6'>
-            <SignUp />
-          </div>
-        )}
-
-        {/* 自定义登录表单 */}
-        {!enableClerk && <SignUpForm />}
-      </div>
-    </>
-  )
+  return <></>
 }
 
 export {

@@ -62,44 +62,12 @@ export const Footer = props => {
                 </div>
               )
             })}
-
-            {/* 页脚右侧最新博文 */}
-            <div className='w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12'>
-              <div className='mb-10 w-full'>
-                <h4 className='mb-9 text-lg font-semibold text-white'>
-                  {siteConfig('STARTER_FOOTER_BLOG_LATEST_TITLE')}
-                </h4>
-                {/* 展示两条最新博客文章 */}
-                <div className='flex flex-col gap-8'>
-                  {latestPosts?.map((item, index) => {
-                    return (
-                      <Link
-                        key={index}
-                        href={item?.href}
-                        className='group flex items-center gap-[22px]'>
-                        {item.pageCoverThumbnail && (
-                          <div className='overflow-hidden rounded w-20 h-12'>
-                            <img
-                              src={item.pageCoverThumbnail}
-                              alt={item.title}
-                            />
-                          </div>
-                        )}
-                        <span className='line-clamp-2 max-w-[180px] text-base text-gray-7 group-hover:text-white'>
-                          {item.title}
-                        </span>
-                      </Link>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* 底部版权信息相关 */}
 
-        <div className='mt-12 border-t border-[#8890A4] border-opacity-40 py-8 lg:mt-[60px]'>
+        {/* <div className='mt-12 border-t border-[#8890A4] border-opacity-40 py-8 lg:mt-[60px]'>
           <div className='container'>
             <div className='-mx-4 flex flex-wrap'>
               <div className='w-full px-4 md:w-2/3 lg:w-1/2'>
@@ -112,18 +80,21 @@ export const Footer = props => {
                     </Link>
                     <Link
                       href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', ''
+                        'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL',
+                        ''
                       )}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
                     </Link>
                     <Link
                       href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', ''
+                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL',
+                        ''
                       )}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT', ''
+                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT',
+                        ''
                       )}
                     </Link>
                   </div>
@@ -145,22 +116,9 @@ export const Footer = props => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Footer 背景 */}
-        <div>
-          <span className='absolute left-0 top-0 z-[-1]'>
-            <img src='/images/starter/footer/shape-1.svg' alt='' />
-          </span>
-
-          <span className='absolute bottom-0 right-0 z-[-1]'>
-            <img src='/images/starter/footer/shape-3.svg' alt='' />
-          </span>
-
-          <span className='absolute right-0 top-0 z-[-1]'>
-            <SVGFooterCircleBG />
-          </span>
-        </div>
       </footer>
       {/* <!-- ====== Footer Section End --> */}
     </>

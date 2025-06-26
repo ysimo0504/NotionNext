@@ -29,7 +29,7 @@ export const Logo = props => {
       const homePageNavBar = router.route === '/' && scrollY < 10 // 在首页并且视窗在页面顶部
 
       if (white || isDarkMode || homePageNavBar) {
-        setLogo(logoWhite)
+        setLogo(logoWhite || logoNormal) // 如果没有白色logo，就使用普通logo
         setLogoTextColor('text-white')
       } else {
         setLogo(logoNormal)
@@ -56,7 +56,7 @@ export const Logo = props => {
             }}
             src={logo}
             alt='logo'
-            className='header-logo mr-1 h-8'
+            className='header-logo mr-1 h-12'
           />
         )}
         {/* logo文字 */}
@@ -64,7 +64,7 @@ export const Logo = props => {
           onClick={() => {
             router.push('/')
           }}
-          className={`${logoTextColor} logo dark:text-white py-1.5 header-logo-text whitespace-nowrap text-2xl font-semibold`}>
+          className={`text-black logo py-1.5 header-logo-text whitespace-nowrap text-2xl font-semibold`}>
           {siteConfig('TITLE')}
         </span>
       </div>
