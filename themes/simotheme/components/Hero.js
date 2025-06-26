@@ -3,120 +3,167 @@ import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import Link from 'next/link'
+import SocialButton from './SocialButton'
 
 /**
- * 英雄大图区块
+ * 英雄大图区块 - one-page 黑白风格
  */
 export const Hero = props => {
   const config = props?.NOTION_CONFIG || CONFIG
+
   return (
     <>
       {/* <!-- ====== Hero Section Start --> */}
       <div
         id='home'
-        className='relative overflow-hidden bg-white pt-[120px] md:pt-[130px] lg:pt-[160px]'>
+        className='relative overflow-hidden bg-white pt-[100px] sm:pt-[120px] md:pt-[130px] lg:pt-[160px] pb-12 sm:pb-16 lg:pb-24'>
         <div className='container'>
-          <div className='flex flex-wrap items-center'>
-            <div className='w-full'>
-              <div
-                className='hero-content wow fadeInUp mx-auto max-w-[780px] text-center'
-                data-wow-delay='.2s'>
+          <div className='flex flex-wrap items-center lg:min-h-[600px]'>
+            {/* 左侧内容区域 */}
+            <div className='w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left'>
+              <div className='max-w-[570px] mx-auto lg:mx-0'>
                 {/* 主标题 */}
-                <h1 className='mb-6 text-3xl font-bold leading-snug text-black sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]'>
-                  {siteConfig('STARTER_HERO_TITLE_1', null, config)}
+                <h1 className='mb-6 text-3xl sm:text-4xl font-bold leading-tight text-black lg:text-5xl xl:text-6xl'>
+                  Hey, I'm Simo
                 </h1>
-                {/* 次标题 */}
-                <p className='mx-auto mb-9 max-w-[600px] text-base font-medium text-black sm:text-lg sm:leading-[1.44]'>
-                  {siteConfig('STARTER_HERO_TITLE_2', null, config)}
+
+                {/* 描述文案 */}
+                <p className='mb-8 text-base sm:text-lg text-gray-600 lg:text-xl leading-relaxed'>
+                  I'm a coder who sometimes builds interesting products
                 </p>
+
                 {/* 按钮组 */}
-                <ul className='mb-10 flex flex-wrap items-center justify-center gap-5'>
+                <div className='mb-10 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start'>
                   {siteConfig('STARTER_HERO_BUTTON_1_TEXT', null, config) && (
-                    <li>
-                      <Link
-                        href={siteConfig('STARTER_HERO_BUTTON_1_URL', '')}
-                        className='inline-flex items-center justify-center rounded-md bg-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color'>
-                        {siteConfig('STARTER_HERO_BUTTON_1_TEXT', null, config)}
-                      </Link>
-                    </li>
+                    <Link
+                      href={siteConfig(
+                        'STARTER_HERO_BUTTON_1_URL',
+                        '/',
+                        config
+                      )}
+                      className='w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-300'>
+                      {siteConfig(
+                        'STARTER_HERO_BUTTON_1_TEXT',
+                        'Get Started',
+                        config
+                      )}
+                    </Link>
                   )}
+
                   {siteConfig('STARTER_HERO_BUTTON_2_TEXT', null, config) && (
-                    <li>
-                      <Link
-                        href={siteConfig(
-                          'STARTER_HERO_BUTTON_2_URL',
-                          null,
-                          config
-                        )}
-                        target='_blank'
-                        className='flex items-center rounded-md bg-gray-100 px-6 py-[14px] text-base font-medium text-black transition duration-300 ease-in-out hover:bg-gray-200 hover:text-dark'
-                        rel='noreferrer'>
-                        {siteConfig(
-                          'STARTER_HERO_BUTTON_2_ICON',
-                          null,
-                          config
-                        ) && (
-                          <img
-                            className='mr-4'
-                            src={siteConfig(
-                              'STARTER_HERO_BUTTON_2_ICON',
-                              null,
-                              config
-                            )}
-                          />
-                        )}
-                        {siteConfig('STARTER_HERO_BUTTON_2_TEXT', null, config)}
-                      </Link>
-                    </li>
+                    <Link
+                      href={siteConfig(
+                        'STARTER_HERO_BUTTON_2_URL',
+                        '#',
+                        config
+                      )}
+                      className='w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium text-black bg-transparent border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300'>
+                      {siteConfig(
+                        'STARTER_HERO_BUTTON_2_TEXT',
+                        'Learn More',
+                        config
+                      )}
+                    </Link>
                   )}
-                </ul>
+
+                  {siteConfig('STARTER_HERO_BUTTON_3_TEXT', null, config) && (
+                    <Link
+                      href={siteConfig(
+                        'STARTER_HERO_BUTTON_3_URL',
+                        '#',
+                        config
+                      )}
+                      className='w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 hover:text-black transition-all duration-300'>
+                      {siteConfig(
+                        'STARTER_HERO_BUTTON_3_TEXT',
+                        'Contact',
+                        config
+                      )}
+                    </Link>
+                  )}
+                </div>
+
+                {/* 社交媒体图标 */}
+                <div className='flex flex-col sm:flex-row items-center justify-center lg:justify-start'>
+                  <span className='mb-3 sm:mb-0 sm:mr-4 text-sm text-gray-500'>
+                    Follow me:
+                  </span>
+                  <SocialButton />
+                </div>
               </div>
             </div>
 
-            {/* 产品预览图片 */}
-            {siteConfig('STARTER_HERO_PREVIEW_IMAGE', null, config) && (
-              <div className='w-full'>
-                <div
-                  className='wow fadeInUp relative z-10 mx-auto max-w-[845px]'
-                  data-wow-delay='.25s'>
-                  <div className='mt-16'>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={siteConfig(
-                        'STARTER_HERO_PREVIEW_IMAGE',
-                        null,
-                        config
-                      )}
-                      alt={siteConfig('TITLE', null, config)}
-                      title={siteConfig('TITLE', null, config)}
-                      className='mx-auto max-w-full rounded-t-xl rounded-tr-xl'
-                    />
-                  </div>
-
-                  {/* 背景图 */}
-                  <div className='absolute -left-9 bottom-0 z-[-1]'>
-                    <img src='/images/starter/bg-hero-circle.svg' />
-                  </div>
-                  <div className='absolute -right-6 -top-6 z-[-1]'>
-                    <img src='/images/starter/bg-hero-circle.svg' />
-                  </div>
+            {/* 右侧插画区域 */}
+            <div className='w-full lg:w-1/2 order-1 lg:order-2 mb-8 lg:mb-0'>
+              <div className='flex justify-center lg:justify-end px-4 lg:px-0'>
+                <div className='max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] w-full'>
+                  <img
+                    src='/images/Illustration.png'
+                    alt='Illustration'
+                    className='w-full h-auto object-contain'
+                  />
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
+
+        {/* 装饰性背景元素 */}
+        <div className='absolute top-0 right-0 -z-10 opacity-10'>
+          <svg width='200' height='200' viewBox='0 0 200 200' fill='none'>
+            <circle
+              cx='100'
+              cy='100'
+              r='80'
+              stroke='currentColor'
+              strokeWidth='0.5'
+            />
+            <circle
+              cx='100'
+              cy='100'
+              r='60'
+              stroke='currentColor'
+              strokeWidth='0.5'
+            />
+            <circle
+              cx='100'
+              cy='100'
+              r='40'
+              stroke='currentColor'
+              strokeWidth='0.5'
+            />
+            <circle
+              cx='100'
+              cy='100'
+              r='20'
+              stroke='currentColor'
+              strokeWidth='0.5'
+            />
+          </svg>
+        </div>
+
+        <div className='absolute bottom-0 left-0 -z-10 opacity-5'>
+          <svg width='150' height='150' viewBox='0 0 150 150' fill='none'>
+            <rect x='20' y='20' width='20' height='20' fill='currentColor' />
+            <rect x='60' y='20' width='20' height='20' fill='currentColor' />
+            <rect x='100' y='20' width='20' height='20' fill='currentColor' />
+            <rect x='20' y='60' width='20' height='20' fill='currentColor' />
+            <rect x='100' y='60' width='20' height='20' fill='currentColor' />
+            <rect x='20' y='100' width='20' height='20' fill='currentColor' />
+            <rect x='60' y='100' width='20' height='20' fill='currentColor' />
+            <rect x='100' y='100' width='20' height='20' fill='currentColor' />
+          </svg>
+        </div>
       </div>
-      {/* 横幅图片 */}
+
+      {/* 横幅图片（如果配置了的话） */}
       {siteConfig('STARTER_HERO_BANNER_IMAGE', null, config) && (
         <div className='container'>
           <LazyImage
             priority
-            className='w-full'
-            src={siteConfig(
-              'STARTER_HERO_BANNER_IMAGE',
-              null,
-              config
-            )}></LazyImage>
+            className='w-full rounded-lg shadow-lg'
+            src={siteConfig('STARTER_HERO_BANNER_IMAGE', null, config)}
+          />
         </div>
       )}
       {/* <!-- ====== Hero Section End --> */}
