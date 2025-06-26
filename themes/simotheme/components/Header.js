@@ -57,22 +57,20 @@ export const Header = props => {
       {/* <!-- ====== Navbar Section Start --> */}
       <div className='ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent'>
         <div className='container'>
-          <div className='relative -mx-4 flex items-center justify-between'>
-            <div className='flex w-full items-center justify-between px-4'>
-              {/* 左侧 Logo */}
-              <div className='flex items-center'>
-                <Logo {...props} />
-              </div>
+          <div className='relative flex items-center justify-between'>
+            {/* 左侧 Logo */}
+            <div className='flex items-center'>
+              <Logo {...props} />
+            </div>
 
-              {/* 右侧菜单 */}
-              <div className='hidden lg:flex lg:items-center'>
-                <MenuList {...props} />
-              </div>
+            {/* 右侧菜单 */}
+            <div className='hidden lg:flex lg:items-center'>
+              <MenuList {...props} />
+            </div>
 
-              {/* 移动端菜单按钮 */}
-              <div className='block lg:hidden'>
-                <MenuList {...props} />
-              </div>
+            {/* 移动端菜单按钮 */}
+            <div className='block lg:hidden'>
+              <MenuList {...props} />
             </div>
           </div>
         </div>

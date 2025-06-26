@@ -230,6 +230,17 @@ const Style = () => {
         font-variant-ligatures: contextual;
       }
 
+      /* 增加整体留白 */
+      .container {
+        max-width: 1200px;
+      }
+
+      /* 确保内容区域有足够的留白 */
+      #main-wrapper {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
       .common-carousel .swiper-button-next,
       .common-carousel .swiper-button-prev {
         position: static !important;

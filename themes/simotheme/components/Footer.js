@@ -54,7 +54,7 @@ export const Footer = props => {
     <>
       {/* <!-- ====== Footer Section Start --> */}
       <footer className='bg-white border-t border-gray-100 py-8'>
-        <div className='container mx-auto px-4'>
+        <div className='container'>
           <div className='flex items-center justify-between relative'>
             {/* 左侧 Logo */}
             <div className='flex items-center'>

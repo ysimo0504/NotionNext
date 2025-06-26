@@ -56,7 +56,7 @@ export const Logo = props => {
             }}
             src={logo}
             alt='logo'
-            className='header-logo mr-1 h-12'
+            className='header-logo mr-3 h-12'
           />
         )}
         {/* logo文字 */}

@@ -51,11 +51,15 @@ import { SVG404 } from './components/svg/SVG404'
  */
 const LayoutBase = props => {
   const { children } = props
+  const router = useRouter()
 
   // 加载wow动画
   useEffect(() => {
     loadWowJS()
   }, [])
+
+  // 检查是否为首页
+  const isHomePage = router.route === '/'
 
   return (
     <div
@@ -69,8 +73,8 @@ const LayoutBase = props => {
         {children}
       </div>
 
-      {/* 页脚 */}
-      <Footer {...props} />
+      {/* 页脚 - 首页不显示 */}
+      {!isHomePage && <Footer {...props} />}
 
       {/* 悬浮按钮 */}
       {/* <BackToTopButton /> */}

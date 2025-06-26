@@ -24,7 +24,13 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: '16px'
+      padding: {
+        DEFAULT: '1.5rem',
+        sm: '1.5rem',
+        lg: '3rem',
+        xl: '4rem',
+        '2xl': '5rem'
+      }
     },
     extend: {
       colors: {
@@ -65,8 +71,8 @@ module.exports = {
       maxWidth: {
         side: '14rem',
         '9/10': '90%',
-        'screen-3xl': '1440px',
-        'screen-4xl': '1560px'
+        'screen-3xl': '1200px',
+        'screen-4xl': '1400px'
       },
       boxShadow: {
         input: '0px 7px 20px rgba(0, 0, 0, 0.03)',
