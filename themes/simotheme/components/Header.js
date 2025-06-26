@@ -61,9 +61,16 @@ export const Header = props => {
             {/* Logo */}
             <Logo {...props} />
 
-            <div className='flex w-full items-center justify-between px-4'>
-              {/* 中间菜单 */}
+            {/* 菜单居中布局 */}
+            <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:block'>
               <MenuList {...props} />
+            </div>
+
+            <div className='flex w-full items-center justify-between px-4 lg:justify-end'>
+              {/* 移动端菜单（左侧显示） */}
+              <div className='block lg:hidden'>
+                <MenuList {...props} />
+              </div>
 
               {/* 右侧功能 */}
               <div className='flex items-center gap-4 justify-end pr-16 lg:pr-0'>
