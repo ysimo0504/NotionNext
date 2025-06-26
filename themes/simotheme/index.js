@@ -70,7 +70,7 @@ const LayoutBase = props => {
       </div>
 
       {/* 页脚 */}
-      {/* <Footer {...props} /> */}
+      <Footer {...props} />
 
       {/* 悬浮按钮 */}
       {/* <BackToTopButton /> */}
