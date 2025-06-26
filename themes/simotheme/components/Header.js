@@ -58,59 +58,20 @@ export const Header = props => {
       <div className='ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent'>
         <div className='container'>
           <div className='relative -mx-4 flex items-center justify-between'>
-            {/* Logo */}
-            <Logo {...props} />
+            <div className='flex w-full items-center justify-between px-4'>
+              {/* 左侧 Logo */}
+              <div className='flex items-center'>
+                <Logo {...props} />
+              </div>
 
-            {/* 菜单居中布局 */}
-            <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:block'>
-              <MenuList {...props} />
-            </div>
-
-            <div className='flex w-full items-center justify-between px-4 lg:justify-end'>
-              {/* 移动端菜单（左侧显示） */}
-              <div className='block lg:hidden'>
+              {/* 右侧菜单 */}
+              <div className='hidden lg:flex lg:items-center'>
                 <MenuList {...props} />
               </div>
 
-              {/* 右侧功能 */}
-              <div className='flex items-center gap-4 justify-end pr-16 lg:pr-0'>
-                {/* 注册登录功能 */}
-                {/* {enableClerk && (
-                  <>
-                    <SignedOut>
-                      <div className='hidden sm:flex gap-4'>
-                        <Link
-                          href={siteConfig('STARTER_NAV_BUTTON_1_URL', '')}
-                          className={`loginBtn ${buttonTextColor} p-2 text-base font-medium hover:opacity-70`}>
-                          {siteConfig('STARTER_NAV_BUTTON_1_TEXT')}
-                        </Link>
-                        <Link
-                          href={siteConfig('STARTER_NAV_BUTTON_2_URL', '')}
-                          className={`signUpBtn ${buttonTextColor} p-2 rounded-md bg-white bg-opacity-20 py-2 text-base font-medium duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark`}>
-                          {siteConfig('STARTER_NAV_BUTTON_2_TEXT')}
-                        </Link>
-                      </div>
-                    </SignedOut>
-                    <SignedIn>
-                      <UserButton />
-                      <DashboardButton className={'hidden md:block'} />
-                    </SignedIn>
-                  </>
-                )}
-                {!enableClerk && (
-                  <div className='hidden sm:flex gap-4'>
-                    <Link
-                      href={siteConfig('STARTER_NAV_BUTTON_1_URL', '')}
-                      className={`loginBtn ${buttonTextColor} p-2 text-base font-medium hover:opacity-70`}>
-                      {siteConfig('STARTER_NAV_BUTTON_1_TEXT')}
-                    </Link>
-                    <Link
-                      href={siteConfig('STARTER_NAV_BUTTON_2_URL', '')}
-                      className={`signUpBtn ${buttonTextColor} p-2 rounded-md bg-white bg-opacity-20 py-2 text-base font-medium duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark`}>
-                      {siteConfig('STARTER_NAV_BUTTON_2_TEXT')}
-                    </Link>
-                  </div>
-                )} */}
+              {/* 移动端菜单按钮 */}
+              <div className='block lg:hidden'>
+                <MenuList {...props} />
               </div>
             </div>
           </div>

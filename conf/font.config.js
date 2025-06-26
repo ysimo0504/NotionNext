@@ -12,7 +12,8 @@ module.exports = {
     // 'https://npm.elemecdn.com/lxgw-wenkai-webfont@1.6.0/style.css',
     'https://fonts.googleapis.com/css?family=Bitter&display=swap',
     'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300&display=swap',
-    'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300&display=swap'
+    'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300&display=swap',
+    'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap'
   ],
   // 无衬线字体 例如'"LXGW WenKai"'
   FONT_SANS: [
@@ -46,6 +47,19 @@ module.exports = {
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
     '"Apple Color Emoji"'
+  ],
+  // 等宽字体（用于代码）
+  FONT_MONO: [
+    '"Fira Code"',
+    '"JetBrains Mono"',
+    '"SF Mono"',
+    'Monaco',
+    'Inconsolata',
+    '"Liberation Mono"',
+    '"Menlo"',
+    'Consolas',
+    '"Courier New"',
+    'monospace'
   ],
   FONT_AWESOME:
     process.env.NEXT_PUBLIC_FONT_AWESOME_PATH ||

@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 代码字体配置 */
+code,
+pre,
+.notion-code,
+.notion-code-copy-button,
+.notion-code-copy-button > svg,
+.prism-code,
+.token,
+.language-*,
+.hljs,
+.shiki,
+.shiki code,
+.shiki pre,
+.markdown-body pre,
+.markdown-body code,
+.markdown-body .highlight pre,
+.markdown-body .highlight code,
+.md-fences,
+.cm-editor,
+.CodeMirror,
+.cm-content,
+.cm-focused,
+.cm-line,
+.cm-cursor,
+kbd,
+samp,
+tt,
+var {
+  font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata,
+    'Liberation Mono', Menlo, Consolas, 'Courier New', monospace !important;
+  font-feature-settings:
+    'liga' 1,
+    'calt' 1; /* 启用连字符和上下文替换 */
+  font-variant-ligatures: contextual;
+}
+
 html {
   overflow-x: hidden;
 }

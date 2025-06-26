@@ -199,6 +199,37 @@ const Style = () => {
         display: none;
       }
 
+      /* 代码字体配置 - FiraCode */
+      code,
+      pre,
+      .notion-code,
+      .prism-code,
+      .token,
+      .hljs,
+      .shiki,
+      .shiki code,
+      .shiki pre,
+      .markdown-body pre,
+      .markdown-body code,
+      .markdown-body .highlight pre,
+      .markdown-body .highlight code,
+      .md-fences,
+      .cm-editor,
+      .CodeMirror,
+      .cm-content,
+      kbd,
+      samp,
+      tt,
+      var {
+        font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', Monaco,
+          Inconsolata, 'Liberation Mono', Menlo, Consolas, 'Courier New',
+          monospace !important;
+        font-feature-settings:
+          'liga' 1,
+          'calt' 1;
+        font-variant-ligatures: contextual;
+      }
+
       .common-carousel .swiper-button-next,
       .common-carousel .swiper-button-prev {
         position: static !important;
