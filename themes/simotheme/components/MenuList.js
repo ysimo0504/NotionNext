@@ -72,17 +72,17 @@ export const MenuList = props => {
         className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
           showMenu ? 'navbarTogglerActive' : ''
         }`}>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
       </button>
 
       <nav
         id='navbarCollapse'
-        className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6 ${
-          showMenu ? '' : 'hidden'
+        className={`absolute right-4 top-full z-50 w-full max-w-[300px] rounded-lg bg-white shadow-2xl border border-gray-100 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none lg:z-auto ${
+          showMenu ? 'block' : 'hidden'
         }`}>
-        <ul className='blcok lg:flex lg:items-center lg:space-x-6'>
+        <ul className='py-2 lg:py-0 lg:flex lg:items-center lg:space-x-6'>
           {links?.map((link, index) => (
             <MenuItem key={index} link={link} />
           ))}
