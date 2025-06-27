@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { Logo } from './Logo'
 import { MenuList } from './MenuList'
+import SearchInput from './SearchInput'
 
 /**
  * 顶部导航栏
@@ -63,13 +64,26 @@ export const Header = props => {
               <Logo {...props} />
             </div>
 
-            {/* 右侧菜单 */}
-            <div className='hidden lg:flex lg:items-center'>
+            {/* 右侧菜单和搜索 */}
+            <div className='hidden lg:flex lg:items-center lg:space-x-4'>
               <MenuList {...props} />
+              {/* 搜索框 - 最右侧 */}
+              <div className='w-64'>
+                <SearchInput {...props} isHeader={true} />
+              </div>
             </div>
 
             {/* 移动端菜单按钮 */}
-            <div className='block lg:hidden'>
+            <div className='block lg:hidden flex items-center space-x-2'>
+              {/* 移动端搜索按钮 */}
+              <button
+                className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
+                onClick={() => {
+                  // 简单跳转到搜索页面
+                  router.push('/search')
+                }}>
+                <i className='fas fa-search text-lg' />
+              </button>
               <MenuList {...props} />
             </div>
           </div>

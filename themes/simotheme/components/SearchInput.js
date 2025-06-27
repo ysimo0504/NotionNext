@@ -9,7 +9,7 @@ let lock = false
  * @param {*} param0
  * @returns
  */
-const SearchInput = ({ currentTag, keyword, cRef }) => {
+const SearchInput = ({ currentTag, keyword, cRef, isHeader = false }) => {
   const { locale } = useGlobal()
   const router = useRouter()
   const searchInputRef = useRef(null)
@@ -61,6 +61,46 @@ const SearchInput = ({ currentTag, keyword, cRef }) => {
     }
   }
 
+  // Header 中的样式
+  if (isHeader) {
+    return (
+      <section className='flex w-full bg-white/20 backdrop-blur-sm rounded-lg border border-white/30'>
+        <input
+          ref={searchInputRef}
+          type='text'
+          placeholder={
+            currentTag
+              ? `${locale.SEARCH.TAGS} #${currentTag}`
+              : `${locale.SEARCH.ARTICLES}`
+          }
+          className='outline-none w-full text-sm pl-4 pr-2 py-2 bg-transparent placeholder-white/70 text-white rounded-l-lg'
+          onKeyUp={handleKeyUp}
+          onCompositionStart={lockSearchInput}
+          onCompositionUpdate={lockSearchInput}
+          onCompositionEnd={unLockSearchInput}
+          onChange={e => updateSearchKey(e.target.value)}
+          defaultValue={keyword || ''}
+        />
+
+        <div
+          className='cursor-pointer flex items-center justify-center px-3 hover:bg-white/10 rounded-r-lg transition-colors duration-200'
+          onClick={handleSearch}>
+          <i className='text-white/80 hover:text-white cursor-pointer fas fa-search text-sm' />
+        </div>
+
+        {showClean && (
+          <div className='cursor-pointer flex items-center justify-center px-2 hover:bg-red-500/20 transition-colors duration-200'>
+            <i
+              className='text-white/60 hover:text-white cursor-pointer fas fa-times text-sm'
+              onClick={cleanSearch}
+            />
+          </div>
+        )}
+      </section>
+    )
+  }
+
+  // 默认样式（用于其他页面）
   return (
     <section className='flex w-full bg-gray-100'>
       <input
