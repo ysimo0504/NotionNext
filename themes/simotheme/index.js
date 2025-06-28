@@ -61,10 +61,68 @@ const LayoutBase = props => {
   // 检查是否为首页
   const isHomePage = router.route === '/'
 
+  // 动态滚动控制
+  useEffect(() => {
+    if (isHomePage && isBrowser) {
+      const checkScrollNeed = () => {
+        const windowHeight = window.innerHeight
+        const documentHeight = document.documentElement.scrollHeight
+        const body = document.body
+
+        // 桌面端始终禁用滚动
+        if (window.innerWidth >= 1024) {
+          body.style.overflow = 'hidden'
+          document.documentElement.style.overflow = 'hidden'
+        }
+        // 移动端根据内容高度决定
+        else {
+          console.log('移动端检测:', {
+            documentHeight,
+            windowHeight,
+            diff: documentHeight - windowHeight,
+            needScroll: documentHeight > windowHeight + 20
+          })
+
+          if (documentHeight > windowHeight + 20) {
+            // 内容超出屏幕，允许滚动
+            body.style.overflow = 'auto'
+            document.documentElement.style.overflow = 'auto'
+            console.log('移动端 - 允许滚动')
+          } else {
+            // 内容适合屏幕，禁用滚动
+            body.style.overflow = 'hidden'
+            document.documentElement.style.overflow = 'hidden'
+            console.log('移动端 - 禁用滚动')
+          }
+        }
+      }
+
+      // 延迟执行，确保DOM渲染完成
+      const timer = setTimeout(checkScrollNeed, 800)
+
+      // 监听窗口大小变化和方向变化
+      window.addEventListener('resize', checkScrollNeed)
+      window.addEventListener('orientationchange', checkScrollNeed)
+
+      return () => {
+        clearTimeout(timer)
+        window.removeEventListener('resize', checkScrollNeed)
+        window.removeEventListener('orientationchange', checkScrollNeed)
+        // 清理样式
+        document.body.style.overflow = 'auto'
+        document.documentElement.style.overflow = 'auto'
+      }
+    } else if (isBrowser) {
+      // 非首页恢复正常滚动
+      document.body.style.overflow = 'auto'
+      document.documentElement.style.overflow = 'auto'
+    }
+  }, [isHomePage])
+
   return (
     <div
       id='theme-starter'
-      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white ${isHomePage ? 'overflow-hidden' : 'scroll-smooth'}`}>
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
       <Style />
       {/* 页头 */}
       <Header {...props} />

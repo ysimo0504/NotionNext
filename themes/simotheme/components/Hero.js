@@ -16,7 +16,7 @@ export const Hero = props => {
       {/* <!-- ====== Hero Section Start --> */}
       <div
         id='home'
-        className='relative overflow-hidden bg-white flex items-center min-h-screen'>
+        className='relative overflow-hidden bg-white py-8 sm:py-12 lg:py-20 flex items-center'>
         <div className='w-full flex justify-center'>
           <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-4 lg:px-8'>
             {/* 左侧内容区域 */}
