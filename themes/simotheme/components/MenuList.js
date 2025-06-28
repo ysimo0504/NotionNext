@@ -79,7 +79,7 @@ export const MenuList = props => {
 
       <nav
         id='navbarCollapse'
-        className={`absolute right-0 top-full z-50 w-full max-w-[300px] rounded-lg bg-white shadow-2xl border border-gray-100 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none lg:z-auto ${
+        className={`absolute right-0 top-full z-[60] w-full max-w-[300px] rounded-lg bg-white shadow-2xl border border-gray-100 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none ${
           showMenu ? 'block' : 'hidden'
         }`}>
         <ul className='py-2 lg:py-0 lg:flex lg:items-center lg:space-x-6'>

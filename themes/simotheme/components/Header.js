@@ -44,6 +44,7 @@ export const Header = props => {
       // eslint-disable-next-line camelcase
       const ud_header = document.querySelector('.ud-header')
       const scrollY = window.scrollY
+      // ud_header?.classList?.add('sticky')
       // 控制台输出当前滚动位置和 sticky 值
       if (scrollY > 0) {
         ud_header?.classList?.add('sticky')
@@ -56,7 +57,7 @@ export const Header = props => {
   return (
     <>
       {/* <!-- ====== Navbar Section Start --> */}
-      <div className='ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent'>
+      <div className='ud-header absolute left-0 top-0 z-50 flex w-full items-center bg-transparent'>
         <div className='container'>
           <div className='relative flex items-center'>
             {/* 左侧 Logo */}

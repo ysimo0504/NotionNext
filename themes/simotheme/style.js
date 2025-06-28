@@ -10,7 +10,7 @@ const Style = () => {
     <style jsx global>{`
       #theme-starter .sticky {
         position: fixed;
-        z-index: 20;
+        z-index: 50;
         background-color: rgb(255 255 255 / 0.8);
         transition-property:
           color,
