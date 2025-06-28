@@ -97,9 +97,17 @@ const Style = () => {
         opacity: 1;
       }
 
+      /* Menu 按钮始终保持黑色 - 不受 sticky 状态影响 */
+      #theme-starter #navbarCollapse li > button,
       #theme-starter .sticky #navbarCollapse li > button {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+      }
+
+      /* 汉堡菜单按钮（三条横线）始终保持黑色 */
+      #theme-starter #navbarToggler span,
+      #theme-starter .sticky #navbarToggler span {
+        background-color: rgb(0 0 0) !important;
       }
 
       :is(.dark #theme-starter .sticky #navbarCollapse li > a) {
@@ -112,9 +120,17 @@ const Style = () => {
         color: rgb(55 88 249 / var(--tw-text-opacity));
       }
 
+      /* Menu 按钮在深色模式下也始终保持黑色 */
+      :is(.dark #theme-starter #navbarCollapse li > button),
       :is(.dark #theme-starter .sticky #navbarCollapse li > button) {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+      }
+
+      /* 深色模式下汉堡菜单按钮也保持黑色 */
+      :is(.dark #theme-starter #navbarToggler span),
+      :is(.dark #theme-starter .sticky #navbarToggler span) {
+        background-color: rgb(0 0 0) !important;
       }
 
       #navbarCollapse li .ud-menu-scroll.active {

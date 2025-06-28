@@ -84,16 +84,6 @@ export const Header = props => {
 
             {/* 移动端右侧区域 */}
             <div className='flex lg:hidden items-center space-x-3 ml-auto'>
-              {/* 移动端搜索按钮 */}
-              <button
-                className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
-                onClick={() => {
-                  // 简单跳转到搜索页面
-                  router.push('/search')
-                }}>
-                <i className='fas fa-search text-lg' />
-              </button>
-
               {/* 移动端菜单按钮 */}
               <MenuList {...props} />
             </div>
