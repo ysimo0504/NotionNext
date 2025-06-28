@@ -53,6 +53,7 @@ export const MenuList = props => {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu) // 切换菜单状态
+    console.log('Menu toggled:', !showMenu) // 调试信息
   }
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export const MenuList = props => {
 
       <nav
         id='navbarCollapse'
-        className={`absolute top-full left-0 right-0 mx-4 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 z-[70] lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none lg:mx-0 lg:mt-0 ${
+        className={`lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none lg:mx-0 lg:mt-0 ${
           showMenu ? 'block' : 'hidden'
         }`}>
         <ul className='py-4 lg:py-0 lg:flex lg:items-center lg:space-x-6'>

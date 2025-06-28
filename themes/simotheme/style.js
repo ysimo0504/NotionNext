@@ -133,6 +133,48 @@ const Style = () => {
         background-color: rgb(0 0 0) !important;
       }
 
+      /* 移动端菜单强制显示和定位 */
+      @media (max-width: 1023px) {
+        #theme-starter #navbarCollapse {
+          position: fixed !important;
+          top: 80px !important;
+          left: 1rem !important;
+          right: 1rem !important;
+          z-index: 9999 !important;
+          background: white !important;
+          border-radius: 0.5rem !important;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+          border: 1px solid #e5e7eb !important;
+        }
+
+        #theme-starter #navbarCollapse.block {
+          display: block !important;
+        }
+
+        #theme-starter #navbarCollapse.hidden {
+          display: none !important;
+        }
+
+        /* 汉堡菜单按钮强制可见 */
+        #theme-starter #navbarToggler {
+          background: rgba(255, 255, 255, 0.9) !important;
+          border-radius: 0.5rem !important;
+          padding: 0.5rem !important;
+          z-index: 10000 !important;
+          position: relative !important;
+        }
+
+        #theme-starter #navbarToggler span {
+          background-color: rgb(0, 0, 0) !important;
+        }
+
+        /* 调试：给移动端菜单添加明显的红色边框 */
+        #theme-starter #navbarCollapse.block {
+          border: 3px solid red !important;
+          background: yellow !important;
+        }
+      }
+
       /* 移动端菜单布局辅助样式 */
       @media (max-width: 1023px) {
         #theme-starter #navbarCollapse {
