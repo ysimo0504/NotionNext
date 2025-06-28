@@ -71,7 +71,7 @@ export const Header = props => {
             </div>
 
             {/* 右侧 Search - 桌面端 */}
-            <div className='hidden lg:flex lg:w-1/4 lg:justify-end'>
+            <div className='hidden lg:flex lg:w-1/4 lg:justify-end lg:pr-8'>
               <button
                 className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
                 onClick={() => {

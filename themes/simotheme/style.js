@@ -8,6 +8,16 @@
 const Style = () => {
   return (
     <style jsx global>{`
+      /* 首页禁用滚动样式 */
+      #theme-starter.overflow-hidden {
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #theme-starter.overflow-hidden body {
+        overflow: hidden;
+      }
+
       #theme-starter .sticky {
         position: fixed;
         z-index: 50;

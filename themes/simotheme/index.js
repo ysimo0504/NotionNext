@@ -64,7 +64,7 @@ const LayoutBase = props => {
   return (
     <div
       id='theme-starter'
-      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white ${isHomePage ? 'overflow-hidden' : 'scroll-smooth'}`}>
       <Style />
       {/* 页头 */}
       <Header {...props} />

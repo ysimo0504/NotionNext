@@ -16,12 +16,12 @@ export const Hero = props => {
       {/* <!-- ====== Hero Section Start --> */}
       <div
         id='home'
-        className='relative overflow-hidden bg-white pt-[100px] sm:pt-[120px] md:pt-[130px] lg:pt-[160px] pb-12 sm:pb-16 lg:pb-24'>
-        <div className='container'>
-          <div className='flex flex-wrap items-center lg:min-h-[600px]'>
+        className='relative overflow-hidden bg-white flex items-center min-h-screen'>
+        <div className='w-full flex justify-center'>
+          <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-4 lg:px-8'>
             {/* 左侧内容区域 */}
             <div className='w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left'>
-              <div className='max-w-[570px] mx-auto lg:mx-0'>
+              <div className='max-w-[570px] mx-auto lg:mx-auto'>
                 {/* 主标题 */}
                 <h1 className='mb-6 text-3xl sm:text-4xl font-bold leading-tight text-black lg:text-5xl xl:text-6xl'>
                   Hey, I'm Simo
@@ -95,7 +95,7 @@ export const Hero = props => {
 
             {/* 右侧插画区域 */}
             <div className='w-full lg:w-1/2 order-1 lg:order-2 mb-8 lg:mb-0'>
-              <div className='flex justify-center lg:justify-end px-4 lg:px-0'>
+              <div className='flex justify-center px-4 lg:px-0'>
                 <div className='max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] w-full'>
                   <img
                     src='/images/Illustration.png'
@@ -158,12 +158,14 @@ export const Hero = props => {
 
       {/* 横幅图片（如果配置了的话） */}
       {siteConfig('STARTER_HERO_BANNER_IMAGE', null, config) && (
-        <div className='container'>
-          <LazyImage
-            priority
-            className='w-full rounded-lg shadow-lg'
-            src={siteConfig('STARTER_HERO_BANNER_IMAGE', null, config)}
-          />
+        <div className='w-full flex justify-center px-4'>
+          <div className='max-w-6xl mx-auto'>
+            <LazyImage
+              priority
+              className='w-full rounded-lg shadow-lg'
+              src={siteConfig('STARTER_HERO_BANNER_IMAGE', null, config)}
+            />
+          </div>
         </div>
       )}
       {/* <!-- ====== Hero Section End --> */}
