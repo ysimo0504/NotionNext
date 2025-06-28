@@ -175,6 +175,31 @@ const Style = () => {
           justify-content: center !important;
           display: flex !important;
           align-items: center !important;
+          padding-top: 0.75rem !important;
+          padding-bottom: 0.75rem !important;
+        }
+
+        /* 移动端子菜单容器居中 */
+        #theme-starter #navbarCollapse .submenu {
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: 90% !important;
+          max-width: 250px !important;
+        }
+
+        /* 移动端子菜单项也居中 */
+        #theme-starter #navbarCollapse .submenu a {
+          text-align: center !important;
+          justify-content: center !important;
+          display: flex !important;
+          align-items: center !important;
+        }
+
+        #theme-starter #navbarCollapse .submenu span {
+          text-align: center !important;
+          width: 100% !important;
+          margin-left: 0 !important;
+          display: block !important;
         }
       }
 
