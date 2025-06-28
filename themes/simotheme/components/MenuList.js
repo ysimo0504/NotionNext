@@ -72,17 +72,17 @@ export const MenuList = props => {
         className={`block rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
           showMenu ? 'navbarTogglerActive' : ''
         }`}>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
+        <span className='relative my-[6px] block h-[2px] w-[30px] bg-black duration-200 transition-all'></span>
       </button>
 
       <nav
         id='navbarCollapse'
-        className={`absolute right-0 top-full z-[60] w-full max-w-[300px] rounded-lg bg-white shadow-2xl border border-gray-100 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none ${
+        className={`absolute top-full left-0 right-0 mx-4 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 z-[70] lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none lg:border-none lg:mx-0 lg:mt-0 ${
           showMenu ? 'block' : 'hidden'
         }`}>
-        <ul className='py-2 lg:py-0 lg:flex lg:items-center lg:space-x-6'>
+        <ul className='py-4 lg:py-0 lg:flex lg:items-center lg:space-x-6'>
           {links?.map((link, index) => (
             <MenuItem key={index} link={link} />
           ))}

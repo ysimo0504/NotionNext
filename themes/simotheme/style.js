@@ -133,6 +133,13 @@ const Style = () => {
         background-color: rgb(0 0 0) !important;
       }
 
+      /* 移动端菜单布局辅助样式 */
+      @media (max-width: 1023px) {
+        #theme-starter #navbarCollapse {
+          z-index: 60 !important;
+        }
+      }
+
       #navbarCollapse li .ud-menu-scroll.active {
         opacity: 0.7;
       }
