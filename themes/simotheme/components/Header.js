@@ -58,23 +58,31 @@ export const Header = props => {
       {/* <!-- ====== Navbar Section Start --> */}
       <div className='ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent'>
         <div className='container'>
-          <div className='relative flex items-center justify-between'>
+          <div className='relative flex items-center'>
             {/* 左侧 Logo */}
-            <div className='flex items-center'>
+            <div className='flex items-center lg:w-1/4'>
               <Logo {...props} />
             </div>
 
-            {/* 右侧菜单和搜索 */}
-            <div className='hidden lg:flex lg:items-center lg:space-x-4'>
+            {/* 中间 MenuList - 桌面端居中显示 */}
+            <div className='hidden lg:flex lg:flex-1 lg:justify-center'>
               <MenuList {...props} />
-              {/* 搜索框 - 最右侧 */}
-              <div className='w-64'>
-                <SearchInput {...props} isHeader={true} />
-              </div>
             </div>
 
-            {/* 移动端菜单按钮 */}
-            <div className='block lg:hidden flex items-center space-x-2'>
+            {/* 右侧 Search - 桌面端 */}
+            <div className='hidden lg:flex lg:w-1/4 lg:justify-end'>
+              <button
+                className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
+                onClick={() => {
+                  // 简单跳转到搜索页面
+                  router.push('/search')
+                }}>
+                <i className='fas fa-search text-lg' />
+              </button>
+            </div>
+
+            {/* 移动端右侧区域 */}
+            <div className='flex lg:hidden items-center space-x-3 ml-auto'>
               {/* 移动端搜索按钮 */}
               <button
                 className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
@@ -84,6 +92,8 @@ export const Header = props => {
                 }}>
                 <i className='fas fa-search text-lg' />
               </button>
+
+              {/* 移动端菜单按钮 */}
               <MenuList {...props} />
             </div>
           </div>
