@@ -69,11 +69,11 @@ export const Hero = props => {
                             )}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
-                            探索我开发的产品和工具
+                            Explore the products and tools I've built
                           </p>
                           <div className='flex items-center text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
-                              查看项目
+                              View Projects
                               <svg
                                 className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
                                 fill='none'
@@ -128,11 +128,11 @@ export const Hero = props => {
                             )}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
-                            阅读我的技术思考和分享
+                            Read my technical insights and thoughts
                           </p>
                           <div className='flex items-center text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
-                              阅读文章
+                              Read Articles
                               <svg
                                 className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
                                 fill='none'
