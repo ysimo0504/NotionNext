@@ -53,7 +53,6 @@ export const MenuList = props => {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu) // 切换菜单状态
-    console.log('Menu toggled:', !showMenu) // 调试信息
   }
 
   useEffect(() => {

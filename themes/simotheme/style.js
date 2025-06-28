@@ -168,10 +168,13 @@ const Style = () => {
           background-color: rgb(0, 0, 0) !important;
         }
 
-        /* 调试：给移动端菜单添加明显的红色边框 */
-        #theme-starter #navbarCollapse.block {
-          border: 3px solid red !important;
-          background: yellow !important;
+        /* 移动端菜单项样式调整 */
+        #theme-starter #navbarCollapse ul li a,
+        #theme-starter #navbarCollapse ul li button {
+          text-align: center !important;
+          justify-content: center !important;
+          display: flex !important;
+          align-items: center !important;
         }
       }
 
