@@ -17,10 +17,10 @@ export const Hero = props => {
       <div
         id='home'
         className='relative overflow-hidden bg-white py-8 sm:py-12 lg:py-20 flex items-center'>
-        <div className='w-full flex justify-center'>
+        <div className='w-full  flex justify-center'>
           <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-4 lg:px-8'>
             {/* 左侧内容区域 */}
-            <div className='w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left'>
+            <div className='w-full lg:w-1/2 order-2  lg:order-1 text-center lg:text-left'>
               <div className='max-w-[570px] mx-auto lg:mx-auto'>
                 {/* 主标题 */}
                 <h1 className='mb-6 text-3xl sm:text-4xl font-bold leading-tight text-black lg:text-5xl xl:text-6xl'>
@@ -71,7 +71,7 @@ export const Hero = props => {
                           <p className='text-sm text-gray-600 mb-3'>
                             Explore the products and tools I've built
                           </p>
-                          <div className='flex items-center text-xs text-gray-500'>
+                          <div className='flex items-center justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
                               View Projects
                               <svg
@@ -130,7 +130,7 @@ export const Hero = props => {
                           <p className='text-sm text-gray-600 mb-3'>
                             Read my technical insights and thoughts
                           </p>
-                          <div className='flex items-center text-xs text-gray-500'>
+                          <div className='flex items-center justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
                               Read Articles
                               <svg
@@ -198,7 +198,7 @@ export const Hero = props => {
         </div>
 
         {/* 装饰性背景元素 */}
-        <div className='absolute top-0 right-0 -z-10 opacity-10'>
+        <div className='absolute  top-0 right-0 -z-10 opacity-10'>
           <svg width='200' height='200' viewBox='0 0 200 200' fill='none'>
             <circle
               cx='100'
