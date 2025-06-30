@@ -58,8 +58,8 @@ export const Header = props => {
     <>
       {/* <!-- ====== Navbar Section Start --> */}
       <div className='ud-header absolute left-0  top-0 z-50 flex w-full items-center bg-transparent'>
-        <div className='container relative bg-green-500'>
-          <div className='flex items-center bg-green-100'>
+        <div className='container relative'>
+          <div className='flex items-center '>
             {/* 左侧 Logo */}
             <div className='flex items-center lg:w-1/4'>
               <Logo {...props} />

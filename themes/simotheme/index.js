@@ -40,6 +40,7 @@ import SearchInput from './components/SearchInput'
 import { SignInForm } from './components/SignInForm'
 import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
+import { HomeFooter } from './components/HomeFooter'
 
 /**
  * 布局框架
@@ -124,14 +125,18 @@ const LayoutBase = props => {
       id='theme-starter'
       className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
       <Style />
-      {/* 页头 */}
+      {/* 页头 - 固定高度 */}
       <Header {...props} />
 
-      <div id='main-wrapper' className='grow'>
+      {/* 主内容区域 - 占据剩余空间 */}
+      <div
+        id='main-wrapper'
+        className={isHomePage ? 'flex-1 flex items-center' : 'grow'}>
         {children}
       </div>
 
-      {/* 页脚 - 首页不显示 */}
+      {/* 页脚 - 固定在底部 */}
+      {isHomePage && <HomeFooter {...props} />}
       {!isHomePage && <Footer {...props} />}
 
       {/* 悬浮按钮 */}
