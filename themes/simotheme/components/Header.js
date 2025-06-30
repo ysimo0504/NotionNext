@@ -58,8 +58,8 @@ export const Header = props => {
     <>
       {/* <!-- ====== Navbar Section Start --> */}
       <div className='ud-header absolute left-0  top-0 z-50 flex w-full items-center bg-transparent'>
-        <div className='container relative'>
-          <div className='flex items-center '>
+        <div className='container relative bg-green-500'>
+          <div className='flex items-center bg-green-100'>
             {/* 左侧 Logo */}
             <div className='flex items-center lg:w-1/4'>
               <Logo {...props} />
@@ -71,7 +71,7 @@ export const Header = props => {
             </div>
 
             {/* 右侧 Search - 桌面端 */}
-            <div className='hidden lg:flex lg:w-1/4 lg:justify-end lg:pr-8'>
+            <div className='hidden lg:flex lg:w-1/4 lg:justify-end '>
               <button
                 className='p-2 text-white hover:text-gray-300 transition-colors duration-200'
                 onClick={() => {
