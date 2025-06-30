@@ -17,10 +17,10 @@ export const Hero = props => {
       <div
         id='home'
         className='relative overflow-hidden bg-white py-8 sm:py-12 lg:py-20 flex items-center'>
-        <div className='w-full  flex justify-center'>
-          <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-4 lg:px-8'>
+        <div className='w-full  flex justify-center '>
+          <div className='flex flex-wrap items-center bg-red-500 justify-center w-full max-w-6xl mx-auto px-6 lg:px-12'>
             {/* 左侧内容区域 */}
-            <div className='w-full lg:w-1/2 order-2  lg:order-1 text-center lg:text-left'>
+            <div className='w-full lg:w-1/2 order-2 bg-blue-500  lg:order-1 text-center lg:text-left'>
               <div className='max-w-[570px] mx-auto lg:mx-auto'>
                 {/* 主标题 */}
                 <h1 className='mb-6 text-3xl sm:text-4xl font-bold leading-tight text-black lg:text-5xl xl:text-6xl'>
@@ -183,7 +183,7 @@ export const Hero = props => {
             </div>
 
             {/* 右侧插画区域 */}
-            <div className='w-full lg:w-1/2 order-1 lg:order-2 mb-8 lg:mb-0'>
+            <div className='w-full lg:w-1/2 order-1 bg-yellow-500 lg:order-2 mb-8 lg:mb-0'>
               <div className='flex justify-center px-4 lg:px-0'>
                 <div className='max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] w-full'>
                   <img
