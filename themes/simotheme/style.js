@@ -55,7 +55,7 @@ const Style = () => {
       }
 
       :is(.dark #theme-starter .sticky) {
-        background-color: rgb(17 25 40 / 0.8);
+        background-color: rgb(255 255 255 / 0.6);
       }
       .text-white {
         --tw-text-opacity: 1;
