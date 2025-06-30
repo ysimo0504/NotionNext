@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import LazyImage from '@/components/LazyImage'
+import Image from 'next/image'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import throttle from 'lodash.throttle'
@@ -54,10 +55,21 @@ export const Logo = props => {
             onClick={() => {
               router.push('/')
             }}
+            placeholderSrc={logo}
             src={logo}
             alt='logo'
             className='header-logo mr-3 h-12'
           />
+          // <Image
+          //   priority
+          //   src={logo}
+          //   alt='logo'
+          //   onClick={() => {
+          //     router.push('/')
+          //   }}
+          //   fill
+          //   className='header-logo mr-3 h-12'
+          // />
         )}
         {/* logo文字 */}
         <span
