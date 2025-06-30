@@ -13,20 +13,19 @@ You can set up your personal website in just a few minutes. Here is the link to 
 # NotionNext
 
 <p>
-  <a aria-label="GitHub commit activity" href="https://github.com/tangly1024/NotionNext/commits/main" title="GitHub commit activity">
-    <img src="https://img.shields.io/github/commit-activity/m/tangly1024/NotionNext?style=for-the-badge"/>
+  <a aria-label="GitHub commit activity" href="https://github.com/heysimo/NotionNext/commits/main" title="GitHub commit activity">
+    <img src="https://img.shields.io/github/commit-activity/m/heysimo/NotionNext?style=for-the-badge"/>
   </a>
-  <a aria-label="GitHub contributors" href="https://github.com/tangly1024/NotionNext/graphs/contributors" title="GitHub contributors">
-    <img src="https://img.shields.io/github/contributors/tangly1024/NotionNext?color=orange&style=for-the-badge"/>
+  <a aria-label="GitHub contributors" href="https://github.com/heysimo/NotionNext/graphs/contributors" title="GitHub contributors">
+    <img src="https://img.shields.io/github/contributors/heysimo/NotionNext?color=orange&style=for-the-badge"/>
   </a>
   <a aria-label="Build status" href="#" title="Build status">
-    <img src="https://img.shields.io/github/deployments/tangly1024/NotionNext/Production?logo=Vercel&style=for-the-badge"/>
+    <img src="https://img.shields.io/github/deployments/heysimo/NotionNext/Production?logo=Vercel&style=for-the-badge"/>
   </a>
   <a aria-label="Powered by Vercel" href="https://vercel.com?utm_source=Craigary&utm_campaign=oss" title="Powered by Vercel">
     <img src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg" height="28"/>
   </a>
 </p>
-
 
 [中文文档](./README.md) | README in English
 
@@ -34,14 +33,13 @@ You can set up your personal website in just a few minutes. Here is the link to 
 
 A static blog system built with NextJS and Notion API, deployed on Vercel. Designed for Notion and all creators.
 
-
 ## Preview
 
-Live Demo：[https://preview.tangly1024.com/](https://preview.tangly1024.com/) ，Project supports switching between multiple themes. Can't find a theme you like? How about [contributing](/CONTRIBUTING.md) one?~
+Live Demo：[https://preview.heysimo.com/](https://preview.heysimo.com/) ，Project supports switching between multiple themes. Can't find a theme you like? How about [contributing](/CONTRIBUTING.md) one?~
 
-| Next | Medium | Hexo | Fukasawa |
-|--|--|--|--|
-| <img src='./docs/theme-next.png' width='300'/> [NEXT](https://preview.tangly1024.com/?theme=next)  | <img src='./docs/theme-medium.png' width='300'/> [MEDIUM](https://preview.tangly1024.com/?theme=medium) | <img src='./docs/theme-hexo.png' width='300'/> [HEXO](https://preview.tangly1024.com/?theme=hexo) | <img src='./docs/theme-fukasawa.png' width='300'/> [FUKASAWA](https://preview.tangly1024.com/?theme=fukasawa) |
+| Next                                                                                           | Medium                                                                                               | Hexo                                                                                           | Fukasawa                                                                                                   |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| <img src='./docs/theme-next.png' width='300'/> [NEXT](https://preview.heysimo.com/?theme=next) | <img src='./docs/theme-medium.png' width='300'/> [MEDIUM](https://preview.heysimo.com/?theme=medium) | <img src='./docs/theme-hexo.png' width='300'/> [HEXO](https://preview.heysimo.com/?theme=hexo) | <img src='./docs/theme-fukasawa.png' width='300'/> [FUKASAWA](https://preview.heysimo.com/?theme=fukasawa) |
 
 ## Acknowledgements
 
@@ -55,7 +53,7 @@ Special thanks to Craig Hart for initiating the Nobelium project.
 
 This project exists thanks to all the people who contribute.
 
-[![Contributors](https://contrib.rocks/image?repo=tangly1024/NotionNext)](https://github.com/tangly1024/NotionNext/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=heysimo/NotionNext)](https://github.com/heysimo/NotionNext/graphs/contributors)
 
 ## Technologies Used
 
@@ -64,7 +62,6 @@ This project exists thanks to all the people who contribute.
 - **Rendering Tool**: [React-notion-x](https://github.com/NotionX/react-notion-x)
 - **COMMENT**: [Twikoo](https://github.com/imaegoo/twikoo), [Giscus](https://giscus.app/zh-CN), [Gitalk](https://gitalk.github.io), [Cusdis](https://cusdis.com), [Utterances](https://utteranc.es)
 - **ICON**: [Fontawesome](https://fontawesome.com/v6/icons/)
-
 
 ## License
 

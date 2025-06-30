@@ -112,18 +112,21 @@ export const Footer = props => {
                     </Link>
                     <Link
                       href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', ''
+                        'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL',
+                        ''
                       )}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
                     </Link>
                     <Link
                       href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', ''
+                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL',
+                        ''
                       )}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT', ''
+                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT',
+                        ''
                       )}
                     </Link>
                   </div>
@@ -134,7 +137,7 @@ export const Footer = props => {
                   <p className='text-base text-gray-7'>
                     Designed and Developed by
                     <a
-                      href='https://github.com/tangly1024/NotionNext'
+                      href='https://github.com/heysimo/NotionNext'
                       rel='nofollow noopner noreferrer'
                       target='_blank'
                       className='px-1 text-gray-1 hover:underline'>
