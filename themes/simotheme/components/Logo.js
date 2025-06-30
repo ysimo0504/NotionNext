@@ -46,7 +46,7 @@ export const Logo = props => {
 
   return (
     <div className='w-60 max-w-full '>
-      <div className='navbar-logo flex items-center w-full py-5 cursor-pointer'>
+      <div className='navbar-logo flex items-center w-full py-2 cursor-pointer'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {logo && (
           <LazyImage

@@ -7,7 +7,7 @@ export const HomeFooter = props => {
   return (
     <>
       {/* <!-- ====== Home Footer Section Start --> */}
-      <footer className='bg-white border-t border-gray-100 py-6'>
+      <footer className='bg-white border-gray-100 py-6'>
         <div className='container'>
           <div className='text-center'>
             <p className='text-gray-400 text-sm'>
