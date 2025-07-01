@@ -11,6 +11,43 @@ import SocialButton from './SocialButton'
 export const Hero = props => {
   const config = props?.NOTION_CONFIG || CONFIG
 
+  // 将所有 siteConfig 调用移到组件顶部，确保 Hook 调用顺序一致
+  const STARTER_HERO_BUTTON_1_TEXT = siteConfig(
+    'STARTER_HERO_BUTTON_1_TEXT',
+    null,
+    config
+  )
+  const STARTER_HERO_BUTTON_1_URL = siteConfig(
+    'STARTER_HERO_BUTTON_1_URL',
+    '/',
+    config
+  )
+  const STARTER_HERO_BUTTON_2_TEXT = siteConfig(
+    'STARTER_HERO_BUTTON_2_TEXT',
+    null,
+    config
+  )
+  const STARTER_HERO_BUTTON_2_URL = siteConfig(
+    'STARTER_HERO_BUTTON_2_URL',
+    '#',
+    config
+  )
+  const STARTER_HERO_BUTTON_3_TEXT = siteConfig(
+    'STARTER_HERO_BUTTON_3_TEXT',
+    null,
+    config
+  )
+  const STARTER_HERO_BUTTON_3_URL = siteConfig(
+    'STARTER_HERO_BUTTON_3_URL',
+    '#',
+    config
+  )
+  const STARTER_HERO_BANNER_IMAGE = siteConfig(
+    'STARTER_HERO_BANNER_IMAGE',
+    null,
+    config
+  )
+
   return (
     <>
       {/* <!-- ====== Hero Section Start --> */}
@@ -35,13 +72,9 @@ export const Hero = props => {
                 {/* 卡片式导航区块 */}
                 <div className='mb-10 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
                   {/* My Apps 卡片 */}
-                  {siteConfig('STARTER_HERO_BUTTON_1_TEXT', null, config) && (
+                  {STARTER_HERO_BUTTON_1_TEXT && (
                     <Link
-                      href={siteConfig(
-                        'STARTER_HERO_BUTTON_1_URL',
-                        '/',
-                        config
-                      )}
+                      href={STARTER_HERO_BUTTON_1_URL}
                       className='group p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
@@ -62,11 +95,7 @@ export const Hero = props => {
                         {/* 内容区域 */}
                         <div className='flex-1'>
                           <h3 className='text-lg font-semibold text-black mb-2 group-hover:text-gray-800 transition-colors'>
-                            {siteConfig(
-                              'STARTER_HERO_BUTTON_1_TEXT',
-                              'My Apps',
-                              config
-                            )}
+                            {STARTER_HERO_BUTTON_1_TEXT || 'My Apps'}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
                             Explore the products and tools I've built
@@ -94,13 +123,9 @@ export const Hero = props => {
                   )}
 
                   {/* My Blog 卡片 */}
-                  {siteConfig('STARTER_HERO_BUTTON_2_TEXT', null, config) && (
+                  {STARTER_HERO_BUTTON_2_TEXT && (
                     <Link
-                      href={siteConfig(
-                        'STARTER_HERO_BUTTON_2_URL',
-                        '#',
-                        config
-                      )}
+                      href={STARTER_HERO_BUTTON_2_URL}
                       className='group p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
@@ -121,11 +146,7 @@ export const Hero = props => {
                         {/* 内容区域 */}
                         <div className='flex-1'>
                           <h3 className='text-lg font-semibold text-black mb-2 group-hover:text-gray-800 transition-colors'>
-                            {siteConfig(
-                              'STARTER_HERO_BUTTON_2_TEXT',
-                              'My Blog',
-                              config
-                            )}
+                            {STARTER_HERO_BUTTON_2_TEXT || 'My Blog'}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
                             Read my technical insights and thoughts
@@ -153,20 +174,12 @@ export const Hero = props => {
                   )}
 
                   {/* 第三个按钮保持原样（如果配置了） */}
-                  {siteConfig('STARTER_HERO_BUTTON_3_TEXT', null, config) && (
+                  {STARTER_HERO_BUTTON_3_TEXT && (
                     <div className='sm:col-span-2'>
                       <Link
-                        href={siteConfig(
-                          'STARTER_HERO_BUTTON_3_URL',
-                          '#',
-                          config
-                        )}
+                        href={STARTER_HERO_BUTTON_3_URL}
                         className='w-full inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 hover:text-black transition-all duration-300'>
-                        {siteConfig(
-                          'STARTER_HERO_BUTTON_3_TEXT',
-                          'Contact',
-                          config
-                        )}
+                        {STARTER_HERO_BUTTON_3_TEXT || 'Contact'}
                       </Link>
                     </div>
                   )}
@@ -246,13 +259,13 @@ export const Hero = props => {
       </div>
 
       {/* 横幅图片（如果配置了的话） */}
-      {siteConfig('STARTER_HERO_BANNER_IMAGE', null, config) && (
+      {STARTER_HERO_BANNER_IMAGE && (
         <div className='w-full flex justify-center px-4'>
           <div className='max-w-6xl mx-auto'>
             <LazyImage
               priority
               className='w-full rounded-lg shadow-lg'
-              src={siteConfig('STARTER_HERO_BANNER_IMAGE', null, config)}
+              src={STARTER_HERO_BANNER_IMAGE}
             />
           </div>
         </div>
