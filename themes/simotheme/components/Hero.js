@@ -198,7 +198,7 @@ export const Hero = props => {
             {/* 右侧插画区域 */}
             <div className='w-full lg:w-1/2 order-1  lg:order-2 mb-8 lg:mb-0'>
               <div className='flex justify-center px-4 lg:px-0'>
-                <div className='max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] w-full'>
+                <div className='max-w-[150px] sm:max-w-[250px] lg:max-w-[350px] w-full'>
                   <img
                     src='/images/Illustration.png'
                     alt='Illustration'
