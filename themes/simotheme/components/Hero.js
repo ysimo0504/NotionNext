@@ -53,11 +53,11 @@ export const Hero = props => {
       {/* <!-- ====== Hero Section Start --> */}
       <div
         id='home'
-        className='relative  overflow-hidden bg-white h-full w-full flex items-center justify-center pt-16'>
+        className='relative  overflow-hidden h-full w-full flex  items-center justify-center pt-16'>
         <div className='w-full flex justify-center'>
-          <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-6 lg:px-12'>
+          <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-6'>
             {/* 左侧内容区域 */}
-            <div className='w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left'>
+            <div className='w-full lg:w-auto order-2 lg:order-1 text-center lg:mr-16 lg:text-left'>
               <div className='max-w-[570px] mx-auto lg:mx-auto'>
                 {/* 主标题 */}
                 <h1 className='mb-6 text-3xl sm:text-4xl font-bold leading-tight text-black lg:text-5xl xl:text-6xl'>
@@ -196,7 +196,7 @@ export const Hero = props => {
             </div>
 
             {/* 右侧插画区域 */}
-            <div className='w-full lg:w-1/2 order-1  lg:order-2 mb-8 lg:mb-0'>
+            <div className='w-full lg:w-auto order-1  lg:order-2 mb-8 lg:mb-0'>
               <div className='flex justify-center px-4 lg:px-0'>
                 <div className='max-w-[150px] sm:max-w-[250px] lg:max-w-[350px] w-full'>
                   <img
@@ -211,7 +211,7 @@ export const Hero = props => {
         </div>
 
         {/* 装饰性背景元素 */}
-        <div className='absolute  top-0 right-0 -z-10 opacity-10'>
+        {/* <div className='absolute  top-0 right-0 -z-10 opacity-10'>
           <svg width='200' height='200' viewBox='0 0 200 200' fill='none'>
             <circle
               cx='100'
@@ -255,11 +255,11 @@ export const Hero = props => {
             <rect x='60' y='100' width='20' height='20' fill='currentColor' />
             <rect x='100' y='100' width='20' height='20' fill='currentColor' />
           </svg>
-        </div>
+        </div> */}
       </div>
 
       {/* 横幅图片（如果配置了的话） */}
-      {STARTER_HERO_BANNER_IMAGE && (
+      {/* {STARTER_HERO_BANNER_IMAGE && (
         <div className='w-full flex justify-center px-4'>
           <div className='max-w-6xl mx-auto'>
             <LazyImage
@@ -269,7 +269,7 @@ export const Hero = props => {
             />
           </div>
         </div>
-      )}
+      )} */}
       {/* <!-- ====== Hero Section End --> */}
     </>
   )
