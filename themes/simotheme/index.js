@@ -170,8 +170,22 @@ const LayoutIndex = props => {
  * @returns
  */
 const LayoutSlug = props => {
-  const { post, lock, validPassword } = props
+  const { post, lock, validPassword, allPages } = props
 
+  // 客户端调试信息
+  console.log('🎨 LayoutSlug 调试信息:')
+  console.log('  post:', post)
+  console.log('  allPages 数量:', allPages?.length)
+  console.log(
+    '  所有文章 slugs:',
+    allPages?.map(p => p.slug)
+  )
+  console.log(
+    '  Post 类型文章:',
+    allPages
+      ?.filter(p => p.type === 'Post')
+      ?.map(p => ({ slug: p.slug, title: p.title }))
+  )
   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
   const router = useRouter()
   if (

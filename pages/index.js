@@ -22,6 +22,9 @@ const Index = props => {
  * @returns
  */
 export async function getStaticProps(req) {
+  console.log('🏠 pages/index.js getStaticProps 执行了!')
+  console.log('  请求参数:', req)
+
   const { locale } = req
   const from = 'index'
   const props = await getGlobalData({ from, locale })

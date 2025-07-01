@@ -48,7 +48,7 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
   const fullSlug = prefix + '/' + slug
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
-
+  console.log('props<<<<<', props)
   // 在列表内查找文章
   props.post = props?.allPages?.find(p => {
     return (

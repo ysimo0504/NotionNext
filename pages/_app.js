@@ -30,6 +30,16 @@ const ClerkProvider = dynamic(() =>
  * @returns
  */
 const MyApp = ({ Component, pageProps }) => {
+  // 添加路由追踪日志
+  console.log('🌐 _app.js 路由追踪:')
+  console.log(
+    '  组件名称:',
+    Component.name || Component.displayName || 'Anonymous'
+  )
+  console.log('  pageProps keys:', Object.keys(pageProps || {}))
+  console.log('  是否有 post:', !!pageProps?.post)
+  console.log('  是否有 allPages:', !!pageProps?.allPages)
+
   // 一些可能出现 bug 的样式，可以统一放入该钩子进行调整
   useAdjustStyle()
 
