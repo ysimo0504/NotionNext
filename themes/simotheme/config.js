@@ -20,9 +20,9 @@ const CONFIG = {
   STARTER_HERO_TITLE_2: '通过笔记无感知地建站、成倍放大您的价值', // 英雄区文字
   // 英雄区两个按钮，如果TEXT留空则隐藏按钮
   STARTER_HERO_BUTTON_1_TEXT: 'My Apps', // 英雄区按钮
-  STARTER_HERO_BUTTON_1_URL: '#apps', // 英雄区按钮 - 待定链接
-  STARTER_HERO_BUTTON_2_TEXT: 'My Blog', // 英雄区按钮
-  STARTER_HERO_BUTTON_2_URL: '#blog', // 英雄区按钮 - 待定链接
+  STARTER_HERO_BUTTON_1_URL: '/apps', // 英雄区按钮 - 待定链接
+  STARTER_HERO_BUTTON_2_TEXT: 'My Templates', // 英雄区按钮
+  STARTER_HERO_BUTTON_2_URL: '/templates', // 英雄区按钮 - 待定链接
   STARTER_HERO_BUTTON_2_ICON: '/images/starter/github.svg', // 英雄区按钮2的图标，不需要则留空
   // STARTER_HERO_BUTTON_3_TEXT: '联系我', // 英雄区第三个按钮
   // STARTER_HERO_BUTTON_3_URL: '#contact', // 英雄区第三个按钮链接

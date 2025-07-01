@@ -14,22 +14,22 @@ export const Hero = props => {
   // 将所有 siteConfig 调用移到组件顶部，确保 Hook 调用顺序一致
   const STARTER_HERO_BUTTON_1_TEXT = siteConfig(
     'STARTER_HERO_BUTTON_1_TEXT',
-    null,
+    'My Apps',
     config
   )
   const STARTER_HERO_BUTTON_1_URL = siteConfig(
     'STARTER_HERO_BUTTON_1_URL',
-    '/',
+    '/apps',
     config
   )
   const STARTER_HERO_BUTTON_2_TEXT = siteConfig(
     'STARTER_HERO_BUTTON_2_TEXT',
-    null,
+    'My Templates',
     config
   )
   const STARTER_HERO_BUTTON_2_URL = siteConfig(
     'STARTER_HERO_BUTTON_2_URL',
-    '#',
+    '/templates',
     config
   )
   const STARTER_HERO_BUTTON_3_TEXT = siteConfig(
@@ -98,9 +98,9 @@ export const Hero = props => {
                             {STARTER_HERO_BUTTON_1_TEXT || 'My Apps'}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
-                            Explore the products and tools I've built
+                            Explore the products and tools
                           </p>
-                          <div className='flex items-center justify-end text-xs text-gray-500'>
+                          <div className='flex items-center justify-center  sm:justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
                               View Projects
                               <svg
@@ -149,11 +149,11 @@ export const Hero = props => {
                             {STARTER_HERO_BUTTON_2_TEXT || 'My Blog'}
                           </h3>
                           <p className='text-sm text-gray-600 mb-3'>
-                            Read my technical insights and thoughts
+                            Explore my latest templates
                           </p>
-                          <div className='flex items-center justify-end text-xs text-gray-500'>
+                          <div className='flex items-center justify-center sm:justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
-                              Read Articles
+                              View Templates
                               <svg
                                 className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
                                 fill='none'
@@ -171,17 +171,6 @@ export const Hero = props => {
                         </div>
                       </div>
                     </Link>
-                  )}
-
-                  {/* 第三个按钮保持原样（如果配置了） */}
-                  {STARTER_HERO_BUTTON_3_TEXT && (
-                    <div className='sm:col-span-2'>
-                      <Link
-                        href={STARTER_HERO_BUTTON_3_URL}
-                        className='w-full inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 hover:text-black transition-all duration-300'>
-                        {STARTER_HERO_BUTTON_3_TEXT || 'Contact'}
-                      </Link>
-                    </div>
                   )}
                 </div>
 
