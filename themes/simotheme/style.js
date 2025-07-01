@@ -341,7 +341,6 @@ const Style = () => {
       /* 确保内容区域有足够的留白 */
       #main-wrapper {
         max-width: 100%;
-        margin: 0 auto;
       }
 
       /* 社交媒体按钮统一样式 */
