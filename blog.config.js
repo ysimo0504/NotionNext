@@ -14,7 +14,7 @@ const BLOG = {
   APPEARANCE: 'light', // 强制设置为 light 模式
   APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
-  TITLE: process.env.NEXT_PUBLIC_TITLE || 'Simo', // 网站标题
+  TITLE: process.env.NEXT_PUBLIC_TITLE || "Simo's Space", // 网站标题
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'Simo', // 您的昵称 例如 heysimo
   BIO: process.env.NEXT_PUBLIC_BIO || '', // 作者简介
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://heysimo.com', // 网站地址
