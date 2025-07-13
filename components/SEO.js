@@ -101,7 +101,7 @@ const SEO = props => {
   return (
     <Head>
       <link rel='icon' href={favicon} />
-      <title>{title}</title>
+      <title>{title | description}</title>
       <meta name='theme-color' content={BACKGROUND_DARK} />
       <meta
         name='viewport'
@@ -181,9 +181,7 @@ const getSEOMeta = (props, router, locale) => {
   switch (router.route) {
     case '/':
       return {
-        title: siteInfo?.description
-          ? `${siteInfo?.title || TITLE} | ${siteInfo?.description}`
-          : siteInfo?.title || TITLE,
+        title: siteInfo?.title || TITLE,
         description: `${siteInfo?.description}`,
         image: `${siteInfo?.pageCover}`,
         slug: '',
