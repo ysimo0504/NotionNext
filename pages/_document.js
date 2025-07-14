@@ -48,6 +48,15 @@ class MyDocument extends Document {
         </Head>
 
         <body>
+          {/* Google Tag Manager (noscript) - 放在 body 开始后 */}
+          <noscript>
+            <iframe
+              src='https://www.googletagmanager.com/ns.html?id=GTM-M8XBLJH3'
+              height='0'
+              width='0'
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
           <Main />
           <NextScript />
         </body>
