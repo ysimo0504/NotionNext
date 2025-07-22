@@ -345,20 +345,17 @@ const Style = () => {
 
       /* 社交媒体按钮统一样式 */
       .social-btn {
-        width: 2.25rem;
-        height: 2.25rem;
+        width: 2.5rem;
+        height: 2.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        background-color: #000000;
-        color: #ffffff;
         transition: all 0.3s;
         transform: scale(1);
       }
 
       .social-btn:hover {
-        background-color: #374151;
         transform: scale(1.1);
       }
 

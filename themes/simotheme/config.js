@@ -1,3 +1,5 @@
+import { CONTACT_XIAOHONGSHU } from 'conf/contact.config'
+
 /**
  * 另一个落地页主题
  */
@@ -8,6 +10,9 @@ const CONFIG = {
 
   CONTACT_GITHUB: 'https://github.com/ysimo0504',
   CONTACT_TWITTER: 'https://x.com/heysimo54',
+  CONTACT_NOTION: 'https://www.notion.com/@heysimo',
+  CONTACT_XIAOHONGSHU:
+    'https://www.xiaohongshu.com/user/profile/5d839cc9000000000100b87f',
   // 默认只展示Logo文字，如果设置了logo图片，会在文字左侧显示图标
   STARTER_LOGO: '/images/logo.png', // 普通logo图片 示例：/images/starter/logo/logo.svg
   STARTER_LOGO_WHITE: '/images/logo.png', // 透明底浅色logo，暂时使用同一个logo
