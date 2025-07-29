@@ -14,13 +14,13 @@ const BLOG = {
   APPEARANCE: 'light', // 强制设置为 light 模式
   APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
-  TITLE: process.env.NEXT_PUBLIC_TITLE || "Simo's Space", // 网站标题
+  TITLE: process.env.NEXT_PUBLIC_TITLE || 'Simo', // 网站标题
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'Simo', // 您的昵称 例如 heysimo
   BIO: process.env.NEXT_PUBLIC_BIO || '', // 作者简介
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://heysimo.com', // 网站地址
   KEYWORDS:
     process.env.NEXT_PUBLIC_KEYWORD ||
-    '程序员,blog,博客,自媒体,公众号,独立开发,simo54,Simo54,科技,互联网,Programmer,blog, blog, we media, public number, independent development,simo54, simo54, technology, Internet, heysimo,Notion, 博客, Simo54, Simo, 程序员, 打工人, 干饭人, 独立开发, dev, ximo, ximo54, 小莫, 小莫54, 小程序, iOS, Android, web, ReactNative, RN, Expo, AI', // 网站关键词 英文逗号隔开
+    'heysimo,程序员,blog,博客,自媒体,公众号,独立开发,simo54,Simo54,科技,互联网,Programmer,blog, blog, we media, public number, independent development,simo54, simo54, technology, Internet, heysimo,Notion, 博客, Simo54, Simo, 程序员, 打工人, 干饭人, 独立开发, dev, ximo, ximo54, 小莫, 小莫54, 小程序, iOS, Android, web, ReactNative, RN, Expo, AI', // 网站关键词 英文逗号隔开
   BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png
   BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '', // 备案号 闽ICP备XXXXXX
   BEI_AN_LINK: process.env.NEXT_PUBLIC_BEI_AN_LINK || '', // 备案查询链接，如果用了萌备等备案请在这里填写
