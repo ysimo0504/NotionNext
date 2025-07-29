@@ -51,7 +51,7 @@ class MyDocument extends Document {
           {/* Google Tag Manager (noscript) - 放在 body 开始后 */}
           <noscript>
             <iframe
-              src='https://www.googletagmanager.com/ns.html?id=GTM-M8XBLJH3'
+              src='https://www.googletagmanager.com/ns.html?id=G-LFGQHB4H62'
               height='0'
               width='0'
               style={{ display: 'none', visibility: 'hidden' }}
