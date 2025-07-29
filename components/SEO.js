@@ -113,7 +113,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }}
       />
       <link rel='icon' href={favicon} />
-      <title>{`${title} | ${description}`}</title>
+      <title>
+        {title}
+        {description && title !== description && description?.trim()
+          ? ` | ${description}`
+          : ''}
+      </title>
       <meta name='theme-color' content={BACKGROUND_DARK} />
       <meta
         name='viewport'
