@@ -134,7 +134,7 @@ const NotionPage = ({ post, className }) => {
         }}
       />
 
-      <AdEmbed />
+      {/* <AdEmbed /> */}
       <PrismMac />
     </div>
   )
