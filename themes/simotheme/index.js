@@ -344,12 +344,9 @@ const Layout404 = props => {
  * 翻页博客列表
  */
 const LayoutPostList = props => {
-  const { posts, category, tag } = props
-  const slotTitle = category || tag
-
   return (
     <div className='pt-8'>
-      <SlotBar {...props} />
+      {console.log('siteConfig>>>>>>>>>>', siteConfig('POST_LIST_STYLE'))}
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
         <BlogPostListPage {...props} />
       ) : (
