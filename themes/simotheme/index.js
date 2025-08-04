@@ -42,21 +42,13 @@ import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
 import { HomeFooter } from './components/HomeFooter'
 
-/**
- * 布局框架
- * Landing-2 主题用作产品落地页展示
- * 结合Stripe或者lemonsqueezy插件可以成为saas支付订阅
- * https://play-tailwind.tailgrids.com/
- * @param {*} props
- * @returns
- */
 const LayoutBase = props => {
   const { children } = props
   const router = useRouter()
 
   // 加载wow动画
   useEffect(() => {
-    loadWowJS()
+    // loadWowJS()
   }, [])
 
   // 检查是否为首页
@@ -122,7 +114,7 @@ const LayoutBase = props => {
 
   return (
     <div
-      id='theme-starter'
+      id='theme-simo'
       className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
       <Style />
       {/* 页头 - 固定高度 */}
@@ -158,7 +150,6 @@ const LayoutIndex = props => {
   const posts = props?.allNavPages ? props.allNavPages.slice(0, count) : []
   return (
     <>
-      {/* 英雄区 */}
       {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
     </>
   )
@@ -169,91 +160,91 @@ const LayoutIndex = props => {
  * @param {*} props
  * @returns
  */
-const LayoutSlug = props => {
-  const { post, lock, validPassword, allPages } = props
+// const LayoutSlug = props => {
+//   const { post, lock, validPassword, allPages } = props
 
-  // 客户端调试信息
-  console.log('🎨 LayoutSlug 调试信息:')
-  console.log('  post:', post)
-  console.log('  allPages 数量:', allPages?.length)
-  console.log(
-    '  所有文章 slugs:',
-    allPages?.map(p => p.slug)
-  )
-  console.log(
-    '  Post 类型文章:',
-    allPages
-      ?.filter(p => p.type === 'Post')
-      ?.map(p => ({ slug: p.slug, title: p.title }))
-  )
-  // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
-  const router = useRouter()
-  if (
-    !post &&
-    siteConfig('STARTER_POST_REDIRECT_ENABLE') &&
-    isBrowser &&
-    router.route === '/[prefix]/[slug]'
-  ) {
-    const redirectUrl =
-      siteConfig('STARTER_POST_REDIRECT_URL') +
-      router.asPath.replace('?theme=landing', '')
-    router.push(redirectUrl)
-    return (
-      <div id='theme-starter'>
-        <Loading />
-      </div>
-    )
-  }
+//   // 客户端调试信息
+//   console.log('🎨 LayoutSlug 调试信息:')
+//   console.log('  post:', post)
+//   console.log('  allPages 数量:', allPages?.length)
+//   console.log(
+//     '  所有文章 slugs:',
+//     allPages?.map(p => p.slug)
+//   )
+//   console.log(
+//     '  Post 类型文章:',
+//     allPages
+//       ?.filter(p => p.type === 'Post')
+//       ?.map(p => ({ slug: p.slug, title: p.title }))
+//   )
+//   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
+//   const router = useRouter()
+//   if (
+//     !post &&
+//     siteConfig('STARTER_POST_REDIRECT_ENABLE') &&
+//     isBrowser &&
+//     router.route === '/[prefix]/[slug]'
+//   ) {
+//     const redirectUrl =
+//       siteConfig('STARTER_POST_REDIRECT_URL') +
+//       router.asPath.replace('?theme=landing', '')
+//     router.push(redirectUrl)
+//     return (
+//       <div id='theme-simo'>
+//         <Loading />
+//       </div>
+//     )
+//   }
 
-  return (
-    <>
-      <Banner title={post?.title} description={post?.summary} />
-      <div className='container grow'>
-        <div className='flex flex-wrap justify-center -mx-4'>
-          <div id='container-inner' className='w-full p-4'>
-            {lock && <ArticleLock validPassword={validPassword} />}
+//   return (
+//     <>
+//       <Banner title={post?.title} description={post?.summary} />
+//       <div className='container grow'>
+//         <div className='flex flex-wrap justify-center -mx-4'>
+//           <div id='container-inner' className='w-full p-4'>
+//             {lock && <ArticleLock validPassword={validPassword} />}
 
-            {!lock && post && (
-              <div id='article-wrapper' className='mx-auto'>
-                <NotionPage {...props} />
-                <Comment frontMatter={post} />
-                <ShareBar post={post} />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
+//             {!lock && post && (
+//               <div id='article-wrapper' className='mx-auto'>
+//                 <NotionPage {...props} />
+//                 <Comment frontMatter={post} />
+//                 <ShareBar post={post} />
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   )
+// }
 
 /**
  * 仪表盘
  * @param {*} props
  * @returns
  */
-const LayoutDashboard = props => {
-  const { post } = props
+// const LayoutDashboard = props => {
+//   const { post } = props
 
-  return (
-    <>
-      <div className='container grow'>
-        <div className='flex flex-wrap justify-center -mx-4'>
-          <div id='container-inner' className='w-full p-4'>
-            {post && (
-              <div id='article-wrapper' className='mx-auto'>
-                <NotionPage {...props} />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      {/* 仪表盘 */}
-      <DashboardHeader />
-      <DashboardBody />
-    </>
-  )
-}
+//   return (
+//     <>
+//       <div className='container grow'>
+//         <div className='flex flex-wrap justify-center -mx-4'>
+//           <div id='container-inner' className='w-full p-4'>
+//             {post && (
+//               <div id='article-wrapper' className='mx-auto'>
+//                 <NotionPage {...props} />
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//       {/* 仪表盘 */}
+//       <DashboardHeader />
+//       <DashboardBody />
+//     </>
+//   )
+// }
 
 /**
  * 搜索
@@ -292,12 +283,12 @@ const LayoutSearch = props => {
  * @param {*} props
  * @returns
  */
-const LayoutArchive = props => (
-  <>
-    {/* 博文列表 */}
-    <Blog {...props} />
-  </>
-)
+// const LayoutArchive = props => (
+//   <>
+//     {/* 博文列表 */}
+//     <Blog {...props} />
+//   </>
+// )
 
 /**
  * 404页面
@@ -349,207 +340,207 @@ const Layout404 = props => {
 /**
  * 翻页博客列表
  */
-const LayoutPostList = props => {
-  const { posts, category, tag } = props
-  const slotTitle = category || tag
+// const LayoutPostList = props => {
+//   const { posts, category, tag } = props
+//   const slotTitle = category || tag
 
-  return (
-    <>
-      {/* <!-- ====== Blog Section Start --> */}
-      <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
-        <div className='container mx-auto'>
-          {/* 区块标题文字 */}
-          <div className='-mx-4 flex flex-wrap justify-center'>
-            <div className='w-full px-4'>
-              <div className='mx-auto mb-[60px] max-w-[485px] text-center'>
-                {slotTitle && (
-                  <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
-                    {slotTitle}
-                  </h2>
-                )}
+//   return (
+//     <>
+//       {/* <!-- ====== Blog Section Start --> */}
+//       <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+//         <div className='container mx-auto'>
+//           {/* 区块标题文字 */}
+//           <div className='-mx-4 flex flex-wrap justify-center'>
+//             <div className='w-full px-4'>
+//               <div className='mx-auto mb-[60px] max-w-[485px] text-center'>
+//                 {slotTitle && (
+//                   <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
+//                     {slotTitle}
+//                   </h2>
+//                 )}
 
-                {!slotTitle && (
-                  <>
-                    <span className='mb-2 block text-lg font-semibold text-primary'>
-                      {siteConfig('STARTER_BLOG_TITLE')}
-                    </span>
-                    <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
-                      {siteConfig('STARTER_BLOG_TEXT_1')}
-                    </h2>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: siteConfig('STARTER_BLOG_TEXT_2')
-                      }}
-                      className='text-base text-body-color dark:text-dark-6'></p>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-          {/* 博客列表 此处优先展示3片文章 */}
-          <div className='-mx-4 flex flex-wrap'>
-            {posts?.map((item, index) => {
-              return (
-                <div key={index} className='w-full px-4 md:w-1/2 lg:w-1/3'>
-                  <div
-                    className='wow fadeInUp group mb-10'
-                    data-wow-delay='.1s'>
-                    <div className='mb-8 overflow-hidden rounded-[5px]'>
-                      <Link href={item?.href} className='block'>
-                        <img
-                          src={item.pageCoverThumbnail}
-                          alt={item.title}
-                          className='w-full transition group-hover:rotate-6 group-hover:scale-125'
-                        />
-                      </Link>
-                    </div>
-                    <div>
-                      <span className='mb-6 inline-block rounded-[5px] bg-primary px-4 py-0.5 text-center text-xs font-medium leading-loose text-white'>
-                        {item.publishDay}
-                      </span>
-                      <h3>
-                        <Link
-                          href={item?.href}
-                          className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'>
-                          {item.title}
-                        </Link>
-                      </h3>
-                      <p className='max-w-[370px] text-base text-body-color dark:text-dark-6'>
-                        {item.summary}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-      {/* <!-- ====== Blog Section End --> */}
-    </>
-  )
-}
+//                 {!slotTitle && (
+//                   <>
+//                     <span className='mb-2 block text-lg font-semibold text-primary'>
+//                       {siteConfig('STARTER_BLOG_TITLE')}
+//                     </span>
+//                     <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
+//                       {siteConfig('STARTER_BLOG_TEXT_1')}
+//                     </h2>
+//                     <p
+//                       dangerouslySetInnerHTML={{
+//                         __html: siteConfig('STARTER_BLOG_TEXT_2')
+//                       }}
+//                       className='text-base text-body-color dark:text-dark-6'></p>
+//                   </>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//           {/* 博客列表 此处优先展示3片文章 */}
+//           <div className='-mx-4 flex flex-wrap'>
+//             {posts?.map((item, index) => {
+//               return (
+//                 <div key={index} className='w-full px-4 md:w-1/2 lg:w-1/3'>
+//                   <div
+//                     className='wow fadeInUp group mb-10'
+//                     data-wow-delay='.1s'>
+//                     <div className='mb-8 overflow-hidden rounded-[5px]'>
+//                       <Link href={item?.href} className='block'>
+//                         <img
+//                           src={item.pageCoverThumbnail}
+//                           alt={item.title}
+//                           className='w-full transition group-hover:rotate-6 group-hover:scale-125'
+//                         />
+//                       </Link>
+//                     </div>
+//                     <div>
+//                       <span className='mb-6 inline-block rounded-[5px] bg-primary px-4 py-0.5 text-center text-xs font-medium leading-loose text-white'>
+//                         {item.publishDay}
+//                       </span>
+//                       <h3>
+//                         <Link
+//                           href={item?.href}
+//                           className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'>
+//                           {item.title}
+//                         </Link>
+//                       </h3>
+//                       <p className='max-w-[370px] text-base text-body-color dark:text-dark-6'>
+//                         {item.summary}
+//                       </p>
+//                     </div>
+//                   </div>
+//                 </div>
+//               )
+//             })}
+//           </div>
+//         </div>
+//       </section>
+//       {/* <!-- ====== Blog Section End --> */}
+//     </>
+//   )
+// }
 /**
  * 分类列表
  * @param {*} props
  * @returns
  */
-const LayoutCategoryIndex = props => {
-  const { categoryOptions } = props
-  const { locale } = useGlobal()
-  return (
-    <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
-      <div className='container mx-auto  min-h-96'>
-        <span className='mb-2 text-lg font-semibold text-primary flex justify-center items-center '>
-          {locale.COMMON.CATEGORY}
-        </span>
-        <div
-          id='category-list'
-          className='duration-200 flex flex-wrap justify-center items-center '>
-          {categoryOptions?.map(category => {
-            return (
-              <Link
-                key={category.name}
-                href={`/category/${category.name}`}
-                passHref
-                legacyBehavior>
-                <h2
-                  className={
-                    'hover:text-black text-2xl font-semibold text-dark sm:text-4xl md:text-[40px] md:leading-[1.2] dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'
-                  }>
-                  <i className='mr-4 fas fa-folder' />
-                  {category.name}({category.count})
-                </h2>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
+// const LayoutCategoryIndex = props => {
+//   const { categoryOptions } = props
+//   const { locale } = useGlobal()
+//   return (
+//     <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+//       <div className='container mx-auto  min-h-96'>
+//         <span className='mb-2 text-lg font-semibold text-primary flex justify-center items-center '>
+//           {locale.COMMON.CATEGORY}
+//         </span>
+//         <div
+//           id='category-list'
+//           className='duration-200 flex flex-wrap justify-center items-center '>
+//           {categoryOptions?.map(category => {
+//             return (
+//               <Link
+//                 key={category.name}
+//                 href={`/category/${category.name}`}
+//                 passHref
+//                 legacyBehavior>
+//                 <h2
+//                   className={
+//                     'hover:text-black text-2xl font-semibold text-dark sm:text-4xl md:text-[40px] md:leading-[1.2] dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'
+//                   }>
+//                   <i className='mr-4 fas fa-folder' />
+//                   {category.name}({category.count})
+//                 </h2>
+//               </Link>
+//             )
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
 
 /**
  * 标签列表
  * @param {*} props
  * @returns
  */
-const LayoutTagIndex = props => {
-  const { tagOptions } = props
-  const { locale } = useGlobal()
-  return (
-    <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
-      <div className='container mx-auto  min-h-96'>
-        <span className='mb-2 text-lg font-semibold text-primary flex justify-center items-center '>
-          {locale.COMMON.TAGS}
-        </span>
-        <div
-          id='tags-list'
-          className='duration-200 flex flex-wrap justify-center items-center'>
-          {tagOptions.map(tag => {
-            return (
-              <div key={tag.name} className='p-2'>
-                <Link
-                  key={tag}
-                  href={`/tag/${encodeURIComponent(tag.name)}`}
-                  passHref
-                  className={`cursor-pointer inline-block rounded hover:bg-gray-500 hover:text-white duration-200  mr-2 py-1 px-2 text-md whitespace-nowrap dark:hover:text-white text-gray-600 hover:shadow-xl dark:border-gray-400 notion-${tag.color}_background dark:bg-gray-800`}>
-                  <div className='font-light dark:text-gray-400'>
-                    <i className='mr-1 fas fa-tag' />{' '}
-                    {tag.name + (tag.count ? `(${tag.count})` : '')}{' '}
-                  </div>
-                </Link>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
+// const LayoutTagIndex = props => {
+//   const { tagOptions } = props
+//   const { locale } = useGlobal()
+//   return (
+//     <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+//       <div className='container mx-auto  min-h-96'>
+//         <span className='mb-2 text-lg font-semibold text-primary flex justify-center items-center '>
+//           {locale.COMMON.TAGS}
+//         </span>
+//         <div
+//           id='tags-list'
+//           className='duration-200 flex flex-wrap justify-center items-center'>
+//           {tagOptions.map(tag => {
+//             return (
+//               <div key={tag.name} className='p-2'>
+//                 <Link
+//                   key={tag}
+//                   href={`/tag/${encodeURIComponent(tag.name)}`}
+//                   passHref
+//                   className={`cursor-pointer inline-block rounded hover:bg-gray-500 hover:text-white duration-200  mr-2 py-1 px-2 text-md whitespace-nowrap dark:hover:text-white text-gray-600 hover:shadow-xl dark:border-gray-400 notion-${tag.color}_background dark:bg-gray-800`}>
+//                   <div className='font-light dark:text-gray-400'>
+//                     <i className='mr-1 fas fa-tag' />{' '}
+//                     {tag.name + (tag.count ? `(${tag.count})` : '')}{' '}
+//                   </div>
+//                 </Link>
+//               </div>
+//             )
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
 /**
  * 登录页面
  * @param {*} props
  * @returns
  */
-const LayoutSignIn = props => {
-  const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-  const title = siteConfig('STARTER_SIGNIN', '登录')
-  const description = siteConfig(
-    'STARTER_SIGNIN_DESCRITION',
-    '这里是演示页面，NotionNext目前不提供会员登录功能'
-  )
-  return <></>
-}
+// const LayoutSignIn = props => {
+//   const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+//   const title = siteConfig('STARTER_SIGNIN', '登录')
+//   const description = siteConfig(
+//     'STARTER_SIGNIN_DESCRITION',
+//     '这里是演示页面，NotionNext目前不提供会员登录功能'
+//   )
+//   return <></>
+// }
 
 /**
  * 注册页面
  * @param {*} props
  * @returns
  */
-const LayoutSignUp = props => {
-  const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+// const LayoutSignUp = props => {
+//   const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
-  const title = siteConfig('STARTER_SIGNIN', '注册')
-  const description = siteConfig(
-    'STARTER_SIGNIN_DESCRITION',
-    '这里是演示页面，NotionNext目前不提供会员注册功能'
-  )
-  return <></>
-}
+//   const title = siteConfig('STARTER_SIGNIN', '注册')
+//   const description = siteConfig(
+//     'STARTER_SIGNIN_DESCRITION',
+//     '这里是演示页面，NotionNext目前不提供会员注册功能'
+//   )
+//   return <></>
+// }
 
 export {
   Layout404,
-  LayoutArchive,
+  // LayoutArchive,
   LayoutBase,
-  LayoutCategoryIndex,
-  LayoutDashboard,
+  // LayoutCategoryIndex,
+  // LayoutDashboard,
   LayoutIndex,
-  LayoutPostList,
+  // LayoutPostList,
   LayoutSearch,
-  LayoutSignIn,
-  LayoutSignUp,
-  LayoutSlug,
-  LayoutTagIndex,
+  // LayoutSignIn,
+  // LayoutSignUp,
+  // LayoutSlug,
+  // LayoutTagIndex,
   CONFIG as THEME_CONFIG
 }

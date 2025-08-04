@@ -9,16 +9,16 @@ const Style = () => {
   return (
     <style jsx global>{`
       /* 首页禁用滚动样式 */
-      #theme-starter.overflow-hidden {
+      #theme-simo.overflow-hidden {
         height: 100vh;
         overflow: hidden;
       }
 
-      #theme-starter.overflow-hidden body {
+      #theme-simo.overflow-hidden body {
         overflow: hidden;
       }
 
-      #theme-starter .sticky {
+      #theme-simo .sticky {
         position: fixed;
         z-index: 50;
         background-color: rgb(255 255 255 / 0.8);
@@ -54,7 +54,7 @@ const Style = () => {
         transition-duration: 150ms;
       }
 
-      :is(.dark #theme-starter .sticky) {
+      :is(.dark #theme-simo .sticky) {
         background-color: rgb(255 255 255 / 0.6);
       }
       .text-white {
@@ -65,77 +65,77 @@ const Style = () => {
         --tw-bg-opacity: 1;
         background-color: rgb(196, 50, 50);
       }
-      #theme-starter .sticky {
+      #theme-simo .sticky {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
         box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
       }
 
-      #theme-starter .sticky .navbar-logo {
+      #theme-simo .sticky .navbar-logo {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
       }
 
-      #theme-starter .sticky #navbarToggler span {
+      #theme-simo .sticky #navbarToggler span {
         --tw-bg-opacity: 1;
         background-color: rgb(17 25 40 / var(--tw-bg-opacity));
       }
 
-      :is(.dark #theme-starter .sticky #navbarToggler span) {
+      :is(.dark #theme-simo .sticky #navbarToggler span) {
         --tw-bg-opacity: 1;
         background-color: rgb(255 255 255 / var(--tw-bg-opacity));
       }
 
-      #theme-starter .sticky #navbarCollapse li > a {
+      #theme-simo .sticky #navbarCollapse li > a {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
       }
 
-      #theme-starter .sticky #navbarCollapse li > a:hover {
+      #theme-simo .sticky #navbarCollapse li > a:hover {
         --tw-text-opacity: 1;
         color: rgb(55 88 249 / var(--tw-text-opacity));
         opacity: 1;
       }
 
       /* Menu 按钮始终保持黑色 - 不受 sticky 状态影响 */
-      #theme-starter #navbarCollapse li > button,
-      #theme-starter .sticky #navbarCollapse li > button {
+      #theme-simo #navbarCollapse li > button,
+      #theme-simo .sticky #navbarCollapse li > button {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
       }
 
       /* 汉堡菜单按钮（三条横线）始终保持黑色 */
-      #theme-starter #navbarToggler span,
-      #theme-starter .sticky #navbarToggler span {
+      #theme-simo #navbarToggler span,
+      #theme-simo .sticky #navbarToggler span {
         background-color: rgb(0 0 0) !important;
       }
 
-      :is(.dark #theme-starter .sticky #navbarCollapse li > a) {
+      :is(.dark #theme-simo .sticky #navbarCollapse li > a) {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
       }
 
-      :is(.dark #theme-starter .sticky #navbarCollapse li > a:hover) {
+      :is(.dark #theme-simo .sticky #navbarCollapse li > a:hover) {
         --tw-text-opacity: 1;
         color: rgb(55 88 249 / var(--tw-text-opacity));
       }
 
       /* Menu 按钮在深色模式下也始终保持黑色 */
-      :is(.dark #theme-starter #navbarCollapse li > button),
-      :is(.dark #theme-starter .sticky #navbarCollapse li > button) {
+      :is(.dark #theme-simo #navbarCollapse li > button),
+      :is(.dark #theme-simo .sticky #navbarCollapse li > button) {
         --tw-text-opacity: 1;
         color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
       }
 
       /* 深色模式下汉堡菜单按钮也保持黑色 */
-      :is(.dark #theme-starter #navbarToggler span),
-      :is(.dark #theme-starter .sticky #navbarToggler span) {
+      :is(.dark #theme-simo #navbarToggler span),
+      :is(.dark #theme-simo .sticky #navbarToggler span) {
         background-color: rgb(0 0 0) !important;
       }
 
       /* 移动端菜单强制显示和定位 */
       @media (max-width: 1023px) {
-        #theme-starter #navbarCollapse {
+        #theme-simo #navbarCollapse {
           position: fixed !important;
           top: 80px !important;
           left: 1rem !important;
@@ -147,16 +147,16 @@ const Style = () => {
           border: 1px solid #e5e7eb !important;
         }
 
-        #theme-starter #navbarCollapse.block {
+        #theme-simo #navbarCollapse.block {
           display: block !important;
         }
 
-        #theme-starter #navbarCollapse.hidden {
+        #theme-simo #navbarCollapse.hidden {
           display: none !important;
         }
 
         /* 汉堡菜单按钮强制可见 */
-        #theme-starter #navbarToggler {
+        #theme-simo #navbarToggler {
           background: rgba(255, 255, 255, 0.9) !important;
           border-radius: 0.5rem !important;
           padding: 0.5rem !important;
@@ -164,13 +164,13 @@ const Style = () => {
           position: relative !important;
         }
 
-        #theme-starter #navbarToggler span {
+        #theme-simo #navbarToggler span {
           background-color: rgb(0, 0, 0) !important;
         }
 
         /* 移动端菜单项样式调整 */
-        #theme-starter #navbarCollapse ul li a,
-        #theme-starter #navbarCollapse ul li button {
+        #theme-simo #navbarCollapse ul li a,
+        #theme-simo #navbarCollapse ul li button {
           text-align: center !important;
           justify-content: center !important;
           display: flex !important;
@@ -180,7 +180,7 @@ const Style = () => {
         }
 
         /* 移动端子菜单容器居中 */
-        #theme-starter #navbarCollapse .submenu {
+        #theme-simo #navbarCollapse .submenu {
           left: 50% !important;
           transform: translateX(-50%) !important;
           width: 90% !important;
@@ -188,14 +188,14 @@ const Style = () => {
         }
 
         /* 移动端子菜单项也居中 */
-        #theme-starter #navbarCollapse .submenu a {
+        #theme-simo #navbarCollapse .submenu a {
           text-align: center !important;
           justify-content: center !important;
           display: flex !important;
           align-items: center !important;
         }
 
-        #theme-starter #navbarCollapse .submenu span {
+        #theme-simo #navbarCollapse .submenu span {
           text-align: center !important;
           width: 100% !important;
           margin-left: 0 !important;
@@ -205,7 +205,7 @@ const Style = () => {
 
       /* 移动端菜单布局辅助样式 */
       @media (max-width: 1023px) {
-        #theme-starter #navbarCollapse {
+        #theme-simo #navbarCollapse {
           z-index: 60 !important;
         }
       }
@@ -214,53 +214,53 @@ const Style = () => {
         opacity: 0.7;
       }
 
-      #theme-starter .sticky #navbarCollapse li .ud-menu-scroll.active {
+      #theme-simo .sticky #navbarCollapse li .ud-menu-scroll.active {
         --tw-text-opacity: 1;
         color: rgb(55 88 249 / var(--tw-text-opacity));
         opacity: 1;
       }
 
-      #theme-starter .sticky .loginBtn {
+      #theme-simo .sticky .loginBtn {
         --tw-text-opacity: 1;
         color: rgb(17 25 40 / var(--tw-text-opacity));
       }
 
-      #theme-starter .sticky .loginBtn:hover {
+      #theme-simo .sticky .loginBtn:hover {
         --tw-text-opacity: 1;
         color: rgb(55 88 249 / var(--tw-text-opacity));
         opacity: 1;
       }
 
-      :is(.dark #theme-starter .sticky .loginBtn) {
+      :is(.dark #theme-simo .sticky .loginBtn) {
         --tw-text-opacity: 1;
         color: rgb(255 255 255 / var(--tw-text-opacity));
       }
 
-      :is(.dark #theme-starter .sticky .loginBtn:hover) {
+      :is(.dark #theme-simo .sticky .loginBtn:hover) {
         --tw-text-opacity: 1;
         color: rgb(55 88 249 / var(--tw-text-opacity));
       }
 
-      #theme-starter .sticky .signUpBtn {
+      #theme-simo .sticky .signUpBtn {
         --tw-bg-opacity: 1;
         background-color: rgb(55 88 249 / var(--tw-bg-opacity));
         --tw-text-opacity: 1;
         color: rgb(255 255 255 / var(--tw-text-opacity));
       }
 
-      #theme-starter .sticky .signUpBtn:hover {
+      #theme-simo .sticky .signUpBtn:hover {
         --tw-bg-opacity: 1;
         background-color: rgb(27 68 200 / var(--tw-bg-opacity));
         --tw-text-opacity: 1;
         color: rgb(255 255 255 / var(--tw-text-opacity));
       }
 
-      #theme-starter .sticky #themeSwitcher ~ span {
+      #theme-simo .sticky #themeSwitcher ~ span {
         --tw-text-opacity: 1;
         color: rgb(17 25 40 / var(--tw-text-opacity));
       }
 
-      :is(.dark #theme-starter .sticky #themeSwitcher ~ span) {
+      :is(.dark #theme-simo .sticky #themeSwitcher ~ span) {
         --tw-text-opacity: 1;
         color: rgb(255 255 255 / var(--tw-text-opacity));
       }
