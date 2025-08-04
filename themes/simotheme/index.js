@@ -41,6 +41,9 @@ import { SignInForm } from './components/SignInForm'
 import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
 import { HomeFooter } from './components/HomeFooter'
+import { BlogPostListPage } from './components/BlogPostListPage'
+import { BlogPostListScroll } from './components/BlogPostListScroll'
+// import { SlotBar } from './components/SlotBar'
 
 const LayoutBase = props => {
   const { children } = props
@@ -48,7 +51,7 @@ const LayoutBase = props => {
 
   // 加载wow动画
   useEffect(() => {
-    // loadWowJS()
+    loadWowJS()
   }, [])
 
   // 检查是否为首页
@@ -160,63 +163,63 @@ const LayoutIndex = props => {
  * @param {*} props
  * @returns
  */
-// const LayoutSlug = props => {
-//   const { post, lock, validPassword, allPages } = props
+const LayoutSlug = props => {
+  const { post, lock, validPassword, allPages } = props
 
-//   // 客户端调试信息
-//   console.log('🎨 LayoutSlug 调试信息:')
-//   console.log('  post:', post)
-//   console.log('  allPages 数量:', allPages?.length)
-//   console.log(
-//     '  所有文章 slugs:',
-//     allPages?.map(p => p.slug)
-//   )
-//   console.log(
-//     '  Post 类型文章:',
-//     allPages
-//       ?.filter(p => p.type === 'Post')
-//       ?.map(p => ({ slug: p.slug, title: p.title }))
-//   )
-//   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
-//   const router = useRouter()
-//   if (
-//     !post &&
-//     siteConfig('STARTER_POST_REDIRECT_ENABLE') &&
-//     isBrowser &&
-//     router.route === '/[prefix]/[slug]'
-//   ) {
-//     const redirectUrl =
-//       siteConfig('STARTER_POST_REDIRECT_URL') +
-//       router.asPath.replace('?theme=landing', '')
-//     router.push(redirectUrl)
-//     return (
-//       <div id='theme-simo'>
-//         <Loading />
-//       </div>
-//     )
-//   }
+  // 客户端调试信息
+  console.log('🎨 LayoutSlug 调试信息:')
+  console.log('  post:', post)
+  console.log('  allPages 数量:', allPages?.length)
+  console.log(
+    '  所有文章 slugs:',
+    allPages?.map(p => p.slug)
+  )
+  console.log(
+    '  Post 类型文章:',
+    allPages
+      ?.filter(p => p.type === 'Post')
+      ?.map(p => ({ slug: p.slug, title: p.title }))
+  )
+  // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
+  const router = useRouter()
+  if (
+    !post &&
+    siteConfig('STARTER_POST_REDIRECT_ENABLE') &&
+    isBrowser &&
+    router.route === '/[prefix]/[slug]'
+  ) {
+    const redirectUrl =
+      siteConfig('STARTER_POST_REDIRECT_URL') +
+      router.asPath.replace('?theme=landing', '')
+    router.push(redirectUrl)
+    return (
+      <div id='theme-simo'>
+        <Loading />
+      </div>
+    )
+  }
 
-//   return (
-//     <>
-//       <Banner title={post?.title} description={post?.summary} />
-//       <div className='container grow'>
-//         <div className='flex flex-wrap justify-center -mx-4'>
-//           <div id='container-inner' className='w-full p-4'>
-//             {lock && <ArticleLock validPassword={validPassword} />}
+  return (
+    <>
+      <Banner title={post?.title} description={post?.summary} />
+      <div className='container grow'>
+        <div className='flex flex-wrap justify-center -mx-4'>
+          <div id='container-inner' className='w-full p-4'>
+            {lock && <ArticleLock validPassword={validPassword} />}
 
-//             {!lock && post && (
-//               <div id='article-wrapper' className='mx-auto'>
-//                 <NotionPage {...props} />
-//                 <Comment frontMatter={post} />
-//                 <ShareBar post={post} />
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
+            {!lock && post && (
+              <div id='article-wrapper' className='mx-auto'>
+                <NotionPage {...props} />
+                <Comment frontMatter={post} />
+                <ShareBar post={post} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
 
 /**
  * 仪表盘
@@ -340,86 +343,21 @@ const Layout404 = props => {
 /**
  * 翻页博客列表
  */
-// const LayoutPostList = props => {
-//   const { posts, category, tag } = props
-//   const slotTitle = category || tag
+const LayoutPostList = props => {
+  const { posts, category, tag } = props
+  const slotTitle = category || tag
 
-//   return (
-//     <>
-//       {/* <!-- ====== Blog Section Start --> */}
-//       <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
-//         <div className='container mx-auto'>
-//           {/* 区块标题文字 */}
-//           <div className='-mx-4 flex flex-wrap justify-center'>
-//             <div className='w-full px-4'>
-//               <div className='mx-auto mb-[60px] max-w-[485px] text-center'>
-//                 {slotTitle && (
-//                   <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
-//                     {slotTitle}
-//                   </h2>
-//                 )}
-
-//                 {!slotTitle && (
-//                   <>
-//                     <span className='mb-2 block text-lg font-semibold text-primary'>
-//                       {siteConfig('STARTER_BLOG_TITLE')}
-//                     </span>
-//                     <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
-//                       {siteConfig('STARTER_BLOG_TEXT_1')}
-//                     </h2>
-//                     <p
-//                       dangerouslySetInnerHTML={{
-//                         __html: siteConfig('STARTER_BLOG_TEXT_2')
-//                       }}
-//                       className='text-base text-body-color dark:text-dark-6'></p>
-//                   </>
-//                 )}
-//               </div>
-//             </div>
-//           </div>
-//           {/* 博客列表 此处优先展示3片文章 */}
-//           <div className='-mx-4 flex flex-wrap'>
-//             {posts?.map((item, index) => {
-//               return (
-//                 <div key={index} className='w-full px-4 md:w-1/2 lg:w-1/3'>
-//                   <div
-//                     className='wow fadeInUp group mb-10'
-//                     data-wow-delay='.1s'>
-//                     <div className='mb-8 overflow-hidden rounded-[5px]'>
-//                       <Link href={item?.href} className='block'>
-//                         <img
-//                           src={item.pageCoverThumbnail}
-//                           alt={item.title}
-//                           className='w-full transition group-hover:rotate-6 group-hover:scale-125'
-//                         />
-//                       </Link>
-//                     </div>
-//                     <div>
-//                       <span className='mb-6 inline-block rounded-[5px] bg-primary px-4 py-0.5 text-center text-xs font-medium leading-loose text-white'>
-//                         {item.publishDay}
-//                       </span>
-//                       <h3>
-//                         <Link
-//                           href={item?.href}
-//                           className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'>
-//                           {item.title}
-//                         </Link>
-//                       </h3>
-//                       <p className='max-w-[370px] text-base text-body-color dark:text-dark-6'>
-//                         {item.summary}
-//                       </p>
-//                     </div>
-//                   </div>
-//                 </div>
-//               )
-//             })}
-//           </div>
-//         </div>
-//       </section>
-//       {/* <!-- ====== Blog Section End --> */}
-//     </>
-//   )
-// }
+  return (
+    <div className='pt-8'>
+      <SlotBar {...props} />
+      {siteConfig('POST_LIST_STYLE') === 'page' ? (
+        <BlogPostListPage {...props} />
+      ) : (
+        <BlogPostListScroll {...props} />
+      )}
+    </div>
+  )
+}
 /**
  * 分类列表
  * @param {*} props
@@ -536,11 +474,11 @@ export {
   // LayoutCategoryIndex,
   // LayoutDashboard,
   LayoutIndex,
-  // LayoutPostList,
+  LayoutPostList,
   LayoutSearch,
   // LayoutSignIn,
   // LayoutSignUp,
-  // LayoutSlug,
+  LayoutSlug,
   // LayoutTagIndex,
   CONFIG as THEME_CONFIG
 }
