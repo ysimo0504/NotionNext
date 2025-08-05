@@ -193,7 +193,7 @@ const LayoutSlug = props => {
               <div id='article-wrapper' className='mx-auto'>
                 <NotionPage {...props} />
                 <Comment frontMatter={post} />
-                <ShareBar post={post} />
+                {/* <ShareBar post={post} /> */}
               </div>
             )}
           </div>
