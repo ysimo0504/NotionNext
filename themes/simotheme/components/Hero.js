@@ -70,12 +70,12 @@ export const Hero = props => {
                 </p>
 
                 {/* 卡片式导航区块 */}
-                <div className='mb-10 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <div className='mb-10 grid grid-cols-1 sm:grid-cols-2 gap-4 py-8 lg:gap-6'>
                   {/* My Apps 卡片 */}
                   {STARTER_HERO_BUTTON_1_TEXT && (
                     <Link
                       href={STARTER_HERO_BUTTON_1_URL}
-                      className='group p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
+                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-black hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
                         <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300'>
@@ -97,9 +97,9 @@ export const Hero = props => {
                           <h3 className='text-lg font-semibold text-black mb-2 group-hover:text-gray-800 transition-colors'>
                             {STARTER_HERO_BUTTON_1_TEXT || 'My Apps'}
                           </h3>
-                          <p className='text-sm text-gray-600 mb-3'>
+                          {/* <p className='text-sm text-gray-600 mb-3'>
                             Explore the products and tools
-                          </p>
+                          </p> */}
                           <div className='flex items-center justify-center  sm:justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
                               View Projects
@@ -126,7 +126,7 @@ export const Hero = props => {
                   {STARTER_HERO_BUTTON_2_TEXT && (
                     <Link
                       href={STARTER_HERO_BUTTON_2_URL}
-                      className='group p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
+                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
                         <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300'>
@@ -148,9 +148,9 @@ export const Hero = props => {
                           <h3 className='text-lg font-semibold text-black mb-2 group-hover:text-gray-800 transition-colors'>
                             {STARTER_HERO_BUTTON_2_TEXT || 'My Blog'}
                           </h3>
-                          <p className='text-sm text-gray-600 mb-3'>
+                          {/* <p className='text-sm text-gray-600 mb-3'>
                             Explore my latest templates
-                          </p>
+                          </p> */}
                           <div className='flex items-center justify-center sm:justify-end text-xs text-gray-500'>
                             <span className='inline-flex items-center'>
                               View Templates
