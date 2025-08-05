@@ -133,23 +133,9 @@ const LayoutBase = props => {
  * @returns
  */
 const LayoutIndex = props => {
-  const count = siteConfig('STARTER_BLOG_COUNT', 3, CONFIG)
-  const { locale } = useGlobal()
-  const posts = props?.allNavPages ? props.allNavPages.slice(0, count) : []
   return (
     <>
-      {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
-      {/* {siteConfig('STARTER_BLOG_ENABLE', true, CONFIG) && (
-        <>
-          <Blog posts={posts} />
-          <div className='container mx-auto flex justify-end mb-4'>
-            <SmartLink className='text-lg underline' href={'/archive'}>
-              <span>{locale.COMMON.MORE}</span>
-              <i className='ml-2 fas fa-arrow-right' />
-            </SmartLink>
-          </div>
-        </>
-      )} */}
+      <Hero {...props} />
     </>
   )
 }
@@ -325,12 +311,11 @@ const Layout404 = props => {
 }
 
 /**
- * 翻页博客列表
+ * 博客列表
  */
 const LayoutPostList = props => {
   return (
-    <div className='pt-8'>
-      {console.log('siteConfig>>>>>>>>>>', siteConfig('POST_LIST_STYLE'))}
+    <div className='pt-20'>
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
         <BlogPostListPage {...props} />
       ) : (
@@ -348,7 +333,6 @@ const LayoutPostList = props => {
 const LayoutArchive = props => (
   <>
     {/* 博文列表 */}
-    {console.log('LayoutArchive>>>>>>>>>>', props)}
     <Blog {...props} />
   </>
 )
