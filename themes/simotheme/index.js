@@ -8,41 +8,26 @@ import { siteConfig } from '@/lib/config'
 import { isBrowser } from '@/lib/utils'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { About } from './components/About'
-import { BackToTopButton } from './components/BackToTopButton'
 import { Blog } from './components/Blog'
-import { Brand } from './components/Brand'
-import { Contact } from './components/Contact'
-import { FAQ } from './components/FAQ'
-import { Features } from './components/Features'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Pricing } from './components/Pricing'
-import { Team } from './components/Team'
-import { Testimonials } from './components/Testimonials'
 import CONFIG from './config'
 import { Style } from './style'
 // import { MadeWithButton } from './components/MadeWithButton'
 import Comment from '@/components/Comment'
 import replaceSearchResult from '@/components/Mark'
 import ShareBar from '@/components/ShareBar'
-import DashboardBody from '@/components/ui/dashboard/DashboardBody'
-import DashboardHeader from '@/components/ui/dashboard/DashboardHeader'
 import { useGlobal } from '@/lib/global'
 import { loadWowJS } from '@/lib/plugins/wow'
-import { SignIn, SignUp } from '@clerk/nextjs'
 import Link from 'next/link'
 import { ArticleLock } from './components/ArticleLock'
 import { Banner } from './components/Banner'
-import { CTA } from './components/CTA'
-import SearchInput from './components/SearchInput'
-import { SignInForm } from './components/SignInForm'
-import { SignUpForm } from './components/SignUpForm'
-import { SVG404 } from './components/svg/SVG404'
+import BlogPostListPage from './components/BlogPostListPage'
+import BlogPostListScroll from './components/BlogPostListScroll'
 import { HomeFooter } from './components/HomeFooter'
-import { BlogPostListPage } from './components/BlogPostListPage'
-import { BlogPostListScroll } from './components/BlogPostListScroll'
+import SearchInput from './components/SearchInput'
+import { SVG404 } from './components/svg/SVG404'
 // import { SlotBar } from './components/SlotBar'
 
 const LayoutBase = props => {
@@ -154,6 +139,17 @@ const LayoutIndex = props => {
   return (
     <>
       {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
+      {/* {siteConfig('STARTER_BLOG_ENABLE', true, CONFIG) && (
+        <>
+          <Blog posts={posts} />
+          <div className='container mx-auto flex justify-end mb-4'>
+            <SmartLink className='text-lg underline' href={'/archive'}>
+              <span>{locale.COMMON.MORE}</span>
+              <i className='ml-2 fas fa-arrow-right' />
+            </SmartLink>
+          </div>
+        </>
+      )} */}
     </>
   )
 }
@@ -282,18 +278,6 @@ const LayoutSearch = props => {
 }
 
 /**
- * 文章归档
- * @param {*} props
- * @returns
- */
-// const LayoutArchive = props => (
-//   <>
-//     {/* 博文列表 */}
-//     <Blog {...props} />
-//   </>
-// )
-
-/**
  * 404页面
  * @param {*} props
  * @returns
@@ -355,6 +339,20 @@ const LayoutPostList = props => {
     </div>
   )
 }
+
+/**
+ * 文章归档
+ * @param {*} props
+ * @returns
+ */
+const LayoutArchive = props => (
+  <>
+    {/* 博文列表 */}
+    {console.log('LayoutArchive>>>>>>>>>>', props)}
+    <Blog {...props} />
+  </>
+)
+
 /**
  * 分类列表
  * @param {*} props
@@ -466,7 +464,7 @@ const LayoutPostList = props => {
 
 export {
   Layout404,
-  // LayoutArchive,
+  LayoutArchive,
   LayoutBase,
   // LayoutCategoryIndex,
   // LayoutDashboard,
