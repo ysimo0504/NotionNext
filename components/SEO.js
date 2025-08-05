@@ -283,6 +283,14 @@ const getSEOMeta = (props, router, locale) => {
         slug: 'category',
         type: 'website'
       }
+    case '/blog':
+      return {
+        title: `Blog | ${siteInfo?.title}`,
+        description: `${siteInfo?.description}`,
+        image: `${siteInfo?.pageCover}`,
+        slug: 'blog',
+        type: 'website'
+      }
     default:
       return {
         title: post
