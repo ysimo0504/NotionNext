@@ -152,7 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <meta name='twitter:title' content={title} />
 
       <link rel='icon' href={BLOG_FAVICON} />
-
+      <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
       {COMMENT_WEBMENTION_ENABLE && (
         <>
           <link
