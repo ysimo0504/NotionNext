@@ -4,6 +4,8 @@ import { CONTACT_XIAOHONGSHU } from 'conf/contact.config'
  * 另一个落地页主题
  */
 const CONFIG = {
+  HEXO_POST_LIST_COVER: true,
+  HEXO_POST_LIST_PREVIEW: true,
   // Header 文字颜色配置 - 新增配置项
   STARTER_HEADER_TEXT_COLOR: '#000000', // Header 菜单文字颜色
   STARTER_HEADER_TEXT_COLOR_HOVER: '#000000', // Header 菜单文字悬停颜色
