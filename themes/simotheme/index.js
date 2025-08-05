@@ -315,12 +315,20 @@ const Layout404 = props => {
  */
 const LayoutPostList = props => {
   return (
-    <div className='pt-20'>
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
-        <BlogPostListPage {...props} />
-      ) : (
-        <BlogPostListScroll {...props} />
-      )}
+    // <div className='pt-20'>
+
+    // </div>
+
+    <div className='container grow pt-20'>
+      <div className='flex flex-wrap justify-center -mx-4'>
+        <div id='container-inner' className='w-full p-4'>
+          {siteConfig('POST_LIST_STYLE') === 'page' ? (
+            <BlogPostListPage {...props} />
+          ) : (
+            <BlogPostListScroll {...props} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
