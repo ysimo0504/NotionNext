@@ -23,22 +23,24 @@ const SEO = props => {
 
   useEffect(() => {
     // 使用WebFontLoader字体加载
-    loadExternalResource(
-      'https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js',
-      'js'
-    ).then(url => {
-      const WebFont = window?.WebFont
-      if (WebFont) {
-        // console.log('LoadWebFont', webFontUrl)
-        WebFont.load({
-          custom: {
-            // families: ['"LXGW WenKai"'],
-            urls: webFontUrl
-          }
-        })
-      }
-    })
-  }, [])
+    if (webFontUrl) {
+      loadExternalResource(
+        'https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js',
+        'js'
+      ).then(url => {
+        const WebFont = window?.WebFont
+        if (WebFont) {
+          // console.log('LoadWebFont', webFontUrl)
+          WebFont.load({
+            custom: {
+              // families: ['"LXGW WenKai"'],
+              urls: webFontUrl
+            }
+          })
+        }
+      })
+    }
+  }, [webFontUrl])
 
   // SEO关键词
   const KEYWORDS = siteConfig('KEYWORDS')
@@ -153,6 +155,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <link rel='icon' href={BLOG_FAVICON} />
       <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+
+      {/* RSS订阅链接 */}
+      {siteConfig('ENABLE_RSS', true, NOTION_CONFIG) && (
+        <link
+          rel='alternate'
+          type='application/rss+xml'
+          title={`${title} RSS Feed`}
+          href={`${url}/rss/feed.xml`}
+        />
+      )}
       {COMMENT_WEBMENTION_ENABLE && (
         <>
           <link

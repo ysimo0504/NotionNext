@@ -181,6 +181,7 @@ const nextConfig = {
           {
             source: '/(.*)',
             headers: [
+              // CORS 设置
               { key: 'Access-Control-Allow-Credentials', value: 'true' },
               { key: 'Access-Control-Allow-Origin', value: '*' },
               {
@@ -191,20 +192,71 @@ const nextConfig = {
                 key: 'Access-Control-Allow-Headers',
                 value:
                   'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+              },
+              // 安全设置
+              { key: 'X-Frame-Options', value: 'DENY' },
+              { key: 'X-Content-Type-Options', value: 'nosniff' },
+              { key: 'X-XSS-Protection', value: '1; mode=block' },
+              {
+                key: 'Referrer-Policy',
+                value: 'strict-origin-when-cross-origin'
+              },
+              {
+                key: 'Content-Security-Policy',
+                value:
+                  "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob: *.notion.so *.amazonaws.com *.googleusercontent.com *.githubusercontent.com *.unsplash.com; connect-src 'self' *.google-analytics.com *.googletagmanager.com *.vercel-analytics.com;"
               }
             ]
-          },      {
+          },
+          // 静态资源缓存优化
+          {
+            source: '/images/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/_next/static/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/css/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/js/(.*)',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
             source: '/.well-known/apple-app-site-association',
             headers: [
               {
                 key: 'Content-Type',
-                value: 'application/json',
+                value: 'application/json'
               },
               {
                 key: 'Cache-Control',
-                value: 'public, max-age=3600',
-              },
-            ],
+                value: 'public, max-age=3600'
+              }
+            ]
           }
         ]
       },
