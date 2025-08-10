@@ -80,6 +80,16 @@ function scanSubdirectories(directory) {
  * @type {import('next').NextConfig}
  */
 
+// 解析 R2 域名（用于 images.domains 与 CSP 白名单）
+const R2_PUBLIC_BASE =
+  process.env.R2_PUBLIC_BASE || process.env.NEXT_PUBLIC_R2_PUBLIC_BASE
+let R2_HOST = null
+try {
+  if (R2_PUBLIC_BASE) {
+    R2_HOST = new URL(R2_PUBLIC_BASE).hostname
+  }
+} catch {}
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
@@ -110,7 +120,8 @@ const nextConfig = {
       'source.unsplash.com',
       'p1.qhimg.com',
       'webmention.io',
-      'ko-fi.com'
+      'ko-fi.com',
+      ...(R2_HOST ? [R2_HOST] : [])
     ]
   },
 
@@ -201,11 +212,27 @@ const nextConfig = {
                 key: 'Referrer-Policy',
                 value: 'strict-origin-when-cross-origin'
               },
-              {
-                key: 'Content-Security-Policy',
-                value:
-                  "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob: *.notion.so *.amazonaws.com *.googleusercontent.com *.githubusercontent.com *.unsplash.com; connect-src 'self' *.google-analytics.com *.googletagmanager.com *.vercel-analytics.com;"
-              }
+              (() => {
+                const imgSrc = [
+                  "'self'",
+                  'data:',
+                  'blob:',
+                  '*.notion.so',
+                  '*.amazonaws.com',
+                  '*.googleusercontent.com',
+                  '*.githubusercontent.com',
+                  '*.unsplash.com'
+                ]
+                if (R2_HOST) imgSrc.push(R2_HOST)
+                const csp =
+                  `default-src 'self'; ` +
+                  `script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.vercel-analytics.com; ` +
+                  `style-src 'self' 'unsafe-inline' fonts.googleapis.com; ` +
+                  `font-src 'self' fonts.gstatic.com; ` +
+                  `img-src ${imgSrc.join(' ')}; ` +
+                  `connect-src 'self' *.google-analytics.com *.googletagmanager.com *.vercel-analytics.com;`
+                return { key: 'Content-Security-Policy', value: csp }
+              })()
             ]
           },
           // 静态资源缓存优化
