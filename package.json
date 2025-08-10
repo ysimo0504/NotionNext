@@ -48,7 +48,11 @@
     "react-hotkeys-hook": "^4.5.0",
     "react-notion-x": "^7.4.3",
     "react-share": "^5.2.2",
-    "react-tweet-embed": "~2.0.0"
+    "react-tweet-embed": "~2.0.0",
+    "@aws-sdk/client-s3": "^3.666.0",
+    "undici": "^6.19.8",
+    "mime": "^3.0.0",
+    "p-limit": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "22.15.3",

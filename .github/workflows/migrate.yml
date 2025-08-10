@@ -1,0 +1,16 @@
+name: Migrate Images to R2
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小时执行
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call migrate API
+        run: |
+          curl -sS -X GET \
+            -H "Authorization: Bearer ${{ secrets.MIGRATE_CRON_KEY }}" \
+            "https://heysimo.com/api/migrate-images?limit=50"
