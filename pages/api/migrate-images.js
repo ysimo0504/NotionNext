@@ -180,31 +180,47 @@ export default async function handler(req, res) {
     const limit = Number(req.query.limit || process.env.MIGRATE_MAX_POSTS || 30)
     const postBlockMaps = await getRecentPostBlockMaps(limit)
 
-    // 提取所有块中的外链图片链接
-    const urls = new Set()
+    // 直接在每篇文章的 blockMap 中替换为 R2 链接
+    const migrated = []
     for (const { blockMap } of postBlockMaps) {
       const block = blockMap?.block || {}
+      // 收集链接
+      const urls = new Set()
       Object.values(block).forEach(b => {
         const v = b?.value
         if (!v) return
         const collected = collectUrlsFromObject(v, EXTERNAL_PATTERNS)
-        collected.forEach(u => {
-          // 对 attachment 或老图床做签名标准化，避免 403
-          const normalized = normalizeSource(u, 'block', b?.value?.id)
-          urls.add(normalized)
-        })
+        collected.forEach(u => urls.add(normalizeSource(u, 'block', v?.id)))
       })
-    }
 
-    const limiter = pLimit(5)
-    const migrated = []
-    for (const url of urls) {
-      try {
-        const newUrl = await limiter(() => migrateUrl(url))
-        migrated.push({ old: url, new: newUrl })
-      } catch (e) {
-        console.error('migrate failed:', url, e?.message || e)
-      }
+      const limiter = pLimit(5)
+      const mapOldToNew = new Map()
+      await Promise.all(
+        Array.from(urls).map(u =>
+          limiter(async () => {
+            try {
+              const n = await migrateUrl(u)
+              mapOldToNew.set(u, n)
+            } catch (e) {
+              console.error('migrate failed:', u, e?.message || e)
+            }
+          })
+        )
+      )
+
+      // 替换 blockMap 中出现的链接（仅替换 properties.source 等典型字段）
+      Object.values(block).forEach(b => {
+        const v = b?.value
+        const src = v?.properties?.source?.[0]?.[0]
+        if (!src) return
+        for (const [oldU, newU] of mapOldToNew.entries()) {
+          if (src.includes(oldU)) {
+            v.properties.source[0][0] = src.replace(oldU, newU)
+            migrated.push({ id: v?.id, old: oldU, new: newU })
+            break
+          }
+        }
+      })
     }
 
     res.status(200).json({
