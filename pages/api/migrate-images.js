@@ -4,6 +4,7 @@ import {
   HeadObjectCommand
 } from '@aws-sdk/client-s3'
 import { request } from 'undici'
+import BLOG from '@/blog.config'
 import crypto from 'crypto'
 import mime from 'mime'
 import pLimit from 'p-limit'
@@ -69,11 +70,36 @@ async function putObject(key, buf, contentType) {
 
 // 拉取图片内容
 async function fetchBuffer(url) {
-  const res = await request(url)
+  const res = await request(url, { maxRedirections: 3 })
   if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
   const buf = Buffer.from(await res.body.arrayBuffer())
   const ct = res.headers['content-type'] || 'application/octet-stream'
   return { buf, ct }
+}
+
+function normalizeSource(src, table, id) {
+  if (!src) return src
+  if (src.startsWith('attachment:')) {
+    const base = `${BLOG.NOTION_HOST}/image/` + encodeURIComponent(src)
+    const search = new URLSearchParams()
+    if (table) search.set('table', table)
+    if (id) search.set('id', id)
+    return `${base}?${search.toString()}`
+  }
+  try {
+    const u = new URL(src)
+    if (
+      u.hostname.includes('amazonaws.com') ||
+      u.hostname === 'secure.notion-static.com'
+    ) {
+      const base = `${BLOG.NOTION_HOST}/image/` + encodeURIComponent(src)
+      const search = new URLSearchParams()
+      if (table) search.set('table', table)
+      if (id) search.set('id', id)
+      return `${base}?${search.toString()}`
+    }
+  } catch {}
+  return src
 }
 
 // 迁移单个 URL
@@ -162,7 +188,11 @@ export default async function handler(req, res) {
         const v = b?.value
         if (!v) return
         const collected = collectUrlsFromObject(v, EXTERNAL_PATTERNS)
-        collected.forEach(u => urls.add(u))
+        collected.forEach(u => {
+          // 对 attachment 或老图床做签名标准化，避免 403
+          const normalized = normalizeSource(u, 'block', b?.value?.id)
+          urls.add(normalized)
+        })
       })
     }
 

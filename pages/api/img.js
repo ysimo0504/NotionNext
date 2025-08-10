@@ -4,6 +4,7 @@ import {
   HeadObjectCommand
 } from '@aws-sdk/client-s3'
 import { request } from 'undici'
+import BLOG from '@/blog.config'
 import crypto from 'crypto'
 import mime from 'mime'
 
@@ -53,18 +54,51 @@ async function putObject(key, buf, contentType) {
 }
 
 async function fetchBuffer(url) {
-  const res = await request(url)
+  const res = await request(url, {
+    maxRedirections: 3
+  })
   if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
   const buf = Buffer.from(await res.body.arrayBuffer())
   const ct = res.headers['content-type'] || 'application/octet-stream'
   return { buf, ct }
 }
 
+function normalizeSource(src, table, id) {
+  // 处理 Notion attachment: 协议 与 未签名资源
+  if (!src) return src
+  if (src.startsWith('attachment:')) {
+    // 交给 notion 的 /image 签名服务
+    const base = `${BLOG.NOTION_HOST}/image/` + encodeURIComponent(src)
+    const search = new URLSearchParams()
+    if (table) search.set('table', table)
+    if (id) search.set('id', id)
+    return `${base}?${search.toString()}`
+  }
+  // 旧图床（amazonaws 或 secure），也走 notion 签名，以保证可访问
+  try {
+    const u = new URL(src)
+    if (
+      u.hostname.includes('amazonaws.com') ||
+      u.hostname === 'secure.notion-static.com'
+    ) {
+      const base = `${BLOG.NOTION_HOST}/image/` + encodeURIComponent(src)
+      const search = new URLSearchParams()
+      if (table) search.set('table', table)
+      if (id) search.set('id', id)
+      return `${base}?${search.toString()}`
+    }
+  } catch {}
+  return src
+}
+
 export default async function handler(req, res) {
   try {
     const src = req.query.src
+    const table = req.query.table
+    const id = req.query.id
     if (!src) return res.status(400).json({ ok: false, error: 'src required' })
-    const { buf, ct } = await fetchBuffer(src)
+    const normalized = normalizeSource(src, table, id)
+    const { buf, ct } = await fetchBuffer(normalized)
     const key = keyFor(ct, buf)
     if (!(await headExists(key))) {
       await putObject(key, buf, ct)
