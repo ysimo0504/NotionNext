@@ -35,9 +35,11 @@ jobs:
           status=$(curl -sS --retry 3 --retry-delay 5 --max-time 600 \
             -w "%{http_code}" -o resp.json \
             -H "Authorization: Bearer ${{ secrets.MIGRATE_CRON_KEY }}" \
+            -H "X-Authorization: Bearer ${{ secrets.MIGRATE_CRON_KEY }}" \
+            -L \
             "$url")
-          echo "HTTP $status" && echo "Response:"
-          cat resp.json | cat
+          echo "HTTP $status"
+          echo "Response:" && cat resp.json || true
           if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
             echo "Request failed" >&2
             exit 1
