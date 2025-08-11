@@ -34,8 +34,10 @@ const s3 = new S3Client({
 const EXTERNAL_PATTERNS = [
   /https?:\/\/(?:www\.)?notion\.so\/(?:image|signed)\/[^\s")>'\]]+/gi,
   /https?:\/\/(?:secure\.notion-static\.com|prod-files-secure\.[^\s/]+\.amazonaws\.com)\/[^\s")>'\]]+/gi,
-  /https?:\/\/images\.unsplash\.com\/[^\s")>'\]]+/gi,
-  /https?:\/\/[a-z0-9.-]+\.(?:githubusercontent|googleusercontent)\.com\/[^\s")>'\]]+/gi
+  /https?:\/\/(?:images|source)\.unsplash\.com\/[^\s")>'\]]+/gi,
+  /https?:\/\/[a-z0-9.-]+\.(?:githubusercontent|googleusercontent)\.com\/[^\s")>'\]]+/gi,
+  /https?:\/\/(?:gravatar\.com|p1\.qhimg\.com|webmention\.io|ko-fi\.com)\/[^\s")>'\]]+/gi,
+  /attachment:[^\s")>'\]]+/gi
 ]
 
 // 生成唯一 key（哈希命名）
