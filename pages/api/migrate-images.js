@@ -168,12 +168,18 @@ export default async function handler(req, res) {
     // 可选的安全校验：若配置了 MIGRATE_CRON_KEY，则要求 Header/Query 携带
     const requiredKey = process.env.MIGRATE_CRON_KEY
     if (requiredKey) {
-      const header = req.headers['authorization'] || ''
-      const queryKey = req.query.key
-      const token = header.startsWith('Bearer ')
-        ? header.substring('Bearer '.length)
-        : ''
-      if (token !== requiredKey && queryKey !== requiredKey) {
+      const hdrAuth = (req.headers['authorization'] || '').toString()
+      const hdrXAuth = (req.headers['x-authorization'] || '').toString()
+      const queryKey = (req.query.key || '').toString()
+      const bearer = 'Bearer '
+      const tokenFromHeader = hdrAuth.startsWith(bearer)
+        ? hdrAuth.substring(bearer.length)
+        : hdrAuth
+      const tokenFromXHeader = hdrXAuth.startsWith(bearer)
+        ? hdrXAuth.substring(bearer.length)
+        : hdrXAuth
+      const provided = tokenFromHeader || tokenFromXHeader || queryKey
+      if (provided !== requiredKey) {
         return res.status(401).json({ ok: false, error: 'Unauthorized' })
       }
     }

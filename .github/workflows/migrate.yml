@@ -30,7 +30,7 @@ jobs:
       - name: Invoke migrate API
         shell: bash
         run: |
-          url="${API_BASE_URL%/}/api/migrate-images?limit=${MIGRATE_LIMIT}"
+          url="${API_BASE_URL%/}/api/migrate-images?limit=${MIGRATE_LIMIT}&key=${{ secrets.MIGRATE_CRON_KEY }}"
           echo "Calling: $url"
           status=$(curl -sS --retry 3 --retry-delay 5 --max-time 600 \
             -w "%{http_code}" -o resp.json \
