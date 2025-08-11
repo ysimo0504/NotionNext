@@ -2,15 +2,43 @@ name: Migrate Images to R2
 
 on:
   schedule:
-    - cron: '0 * * * *' # 每小时执行
+    - cron: '0 */12 * * *' # 每12小时执行（UTC）
   workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Max posts to scan this run'
+        required: false
+        default: '50'
+      api_base_url:
+        description: 'API base url (e.g. https://heysimo.com)'
+        required: false
+        default: 'https://heysimo.com'
 
 jobs:
-  run:
+  migrate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    concurrency:
+      group: migrate-images
+      cancel-in-progress: false
+    env:
+      API_BASE_URL: ${{ inputs.api_base_url || vars.API_BASE_URL || 'https://heysimo.com' }}
+      MIGRATE_LIMIT: ${{ inputs.limit || vars.MIGRATE_LIMIT || '50' }}
     steps:
-      - name: Call migrate API
+      - name: Invoke migrate API
+        shell: bash
         run: |
-          curl -sS -X GET \
+          url="${API_BASE_URL%/}/api/migrate-images?limit=${MIGRATE_LIMIT}"
+          echo "Calling: $url"
+          status=$(curl -sS --retry 3 --retry-delay 5 --max-time 600 \
+            -w "%{http_code}" -o resp.json \
             -H "Authorization: Bearer ${{ secrets.MIGRATE_CRON_KEY }}" \
-            "https://heysimo.com/api/migrate-images?limit=50"
+            "$url")
+          echo "HTTP $status" && echo "Response:"
+          cat resp.json | cat
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "Request failed" >&2
+            exit 1
+          fi
