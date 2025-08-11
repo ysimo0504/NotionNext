@@ -1,8 +1,9 @@
-name: Images to R2
+name: Migrate Images to R2
 
 on:
   schedule:
     - cron: '0 */12 * * *' # 每12小时执行
+  workflow_dispatch: # 支持手动触发
 
 jobs:
   migrate:
