@@ -7,6 +7,7 @@ import { request } from 'undici'
 import BLOG from '@/blog.config'
 import crypto from 'crypto'
 import mime from 'mime'
+import sharp from 'sharp'
 
 const {
   R2_ACCOUNT_ID,
@@ -63,6 +64,49 @@ async function fetchBuffer(url) {
   return { buf, ct }
 }
 
+const MAX_WIDTH = parseInt(process.env.R2_IMAGE_MAX_WIDTH || '2000', 10)
+const MAX_HEIGHT = parseInt(process.env.R2_IMAGE_MAX_HEIGHT || '2000', 10)
+const WEBP_QUALITY = parseInt(process.env.R2_IMAGE_WEBP_QUALITY || '82', 10)
+const TARGET_FORMAT = (process.env.R2_IMAGE_FORMAT || 'webp').toLowerCase()
+
+async function compressIfNeeded(buf, ct) {
+  try {
+    if (!ct || !buf) return { buf, ct }
+    if (ct.includes('svg') || ct.includes('gif')) return { buf, ct }
+    const img = sharp(buf, { animated: false })
+    const meta = await img.metadata()
+    if (!meta) return { buf, ct }
+    const width = meta.width || MAX_WIDTH
+    const height = meta.height || MAX_HEIGHT
+    const needResize = width > MAX_WIDTH || height > MAX_HEIGHT
+    let pipeline = sharp(buf, { animated: false }).rotate()
+    if (needResize) {
+      pipeline = pipeline.resize({
+        width: Math.min(width, MAX_WIDTH),
+        height: Math.min(height, MAX_HEIGHT),
+        fit: 'inside',
+        withoutEnlargement: true
+      })
+    }
+    if (TARGET_FORMAT === 'webp') {
+      pipeline = pipeline.webp({ quality: WEBP_QUALITY })
+      const out = await pipeline.toBuffer()
+      return { buf: out, ct: 'image/webp' }
+    }
+    if (ct.includes('jpeg') || ct.includes('jpg')) {
+      pipeline = pipeline.jpeg({ quality: WEBP_QUALITY })
+    } else if (ct.includes('png')) {
+      pipeline = pipeline.png({ compressionLevel: 9, adaptiveFiltering: true })
+    } else if (ct.includes('webp')) {
+      pipeline = pipeline.webp({ quality: WEBP_QUALITY })
+    }
+    const out = await pipeline.toBuffer()
+    return { buf: out, ct }
+  } catch {
+    return { buf, ct }
+  }
+}
+
 function normalizeSource(src, table, id) {
   // 处理 Notion attachment: 协议 与 未签名资源
   if (!src) return src
@@ -98,10 +142,11 @@ export default async function handler(req, res) {
     const id = req.query.id
     if (!src) return res.status(400).json({ ok: false, error: 'src required' })
     const normalized = normalizeSource(src, table, id)
-    const { buf, ct } = await fetchBuffer(normalized)
-    const key = keyFor(ct, buf)
+    const fetched = await fetchBuffer(normalized)
+    const compressed = await compressIfNeeded(fetched.buf, fetched.ct)
+    const key = keyFor(compressed.ct, compressed.buf)
     if (!(await headExists(key))) {
-      await putObject(key, buf, ct)
+      await putObject(key, compressed.buf, compressed.ct)
     }
     const target = `${R2_PUBLIC_BASE}/${key}`
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
