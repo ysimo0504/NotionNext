@@ -1,4 +1,4 @@
-name: Migrate Images to R2
+name: Images to R2
 
 on:
   schedule:
