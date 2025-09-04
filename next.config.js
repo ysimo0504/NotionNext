@@ -176,12 +176,17 @@ const nextConfig = {
           )
         }
 
+        return [...langsRewrites]
+      },
+  // 301 将 .html 规范到无后缀URL，避免重复内容
+  redirects: process.env.EXPORT
+    ? undefined
+    : () => {
         return [
-          ...langsRewrites,
-          // 伪静态重写
           {
             source: '/:path*.html',
-            destination: '/:path*'
+            destination: '/:path*',
+            permanent: true
           }
         ]
       },

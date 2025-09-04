@@ -52,6 +52,34 @@ const SEO = props => {
     url = `${url}/${meta.slug}`
     image = meta.image || '/bg_image.jpg'
   }
+
+  // 计算 canonical，移除跟踪参数，统一去除结尾斜杠（根路径除外）
+  const buildCanonical = () => {
+    try {
+      const raw = new URL(url)
+      const params = raw.searchParams
+      // 移除常见跟踪参数
+      ;[
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid',
+        'ref'
+      ].forEach(k => params.delete(k))
+      raw.search = params.toString()
+      // 去除多余的末尾斜杠（根路径除外）
+      if (raw.pathname.length > 1 && raw.pathname.endsWith('/')) {
+        raw.pathname = raw.pathname.replace(/\/$/, '')
+      }
+      return raw.toString()
+    } catch (e) {
+      return url
+    }
+  }
+  const canonicalHref = buildCanonical()
   const TITLE = siteConfig('TITLE')
   const title = meta?.title || TITLE
   const description = meta?.description || `${siteInfo?.description}`
@@ -126,6 +154,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         name='viewport'
         content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0'
       />
+      <link rel='canonical' href={canonicalHref} />
       <meta name='robots' content='follow, index' />
       <meta charSet='UTF-8' />
       {SEO_GOOGLE_SITE_VERIFICATION && (
