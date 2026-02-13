@@ -1,16 +1,26 @@
-import {
-  S3Client,
-  PutObjectCommand,
-  HeadObjectCommand
-} from '@aws-sdk/client-s3'
-import { request } from 'undici'
 import BLOG from '@/blog.config'
 import crypto from 'crypto'
-import mime from 'mime'
-import pLimit from 'p-limit'
-import { getGlobalData, getPostBlocks } from '@/lib/db/getSiteData'
+import { fetchGlobalAllData, getPostBlocks } from '@/lib/db/SiteDataApi'
 
-// 从环境变量读取 R2 配置
+let S3Client, PutObjectCommand, HeadObjectCommand, requestFn, mimeMod, pLimit
+
+try {
+  // eslint-disable-next-line
+  const s3Mod = eval("require('@aws-sdk/client-s3')")
+  S3Client = s3Mod.S3Client
+  PutObjectCommand = s3Mod.PutObjectCommand
+  HeadObjectCommand = s3Mod.HeadObjectCommand
+} catch {}
+try {
+  requestFn = eval("require('undici')").request
+} catch {} // eslint-disable-line
+try {
+  mimeMod = eval("require('mime')")
+} catch {} // eslint-disable-line
+try {
+  pLimit = eval("require('p-limit')")
+} catch {} // eslint-disable-line
+
 const {
   R2_ACCOUNT_ID,
   R2_ACCESS_KEY_ID,
@@ -19,18 +29,19 @@ const {
   R2_PUBLIC_BASE
 } = process.env
 
-// 初始化 S3 客户端
-const s3 = new S3Client({
-  region: 'auto',
-  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: R2_ACCESS_KEY_ID,
-    secretAccessKey: R2_SECRET_ACCESS_KEY
-  },
-  forcePathStyle: true
-})
+function getS3() {
+  if (!S3Client || !R2_ACCOUNT_ID) return null
+  return new S3Client({
+    region: 'auto',
+    endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: R2_ACCESS_KEY_ID,
+      secretAccessKey: R2_SECRET_ACCESS_KEY
+    },
+    forcePathStyle: true
+  })
+}
 
-// 外链匹配规则
 const EXTERNAL_PATTERNS = [
   /https?:\/\/(?:www\.)?notion\.so\/(?:image|signed)\/[^\s")>'\]]+/gi,
   /https?:\/\/(?:secure\.notion-static\.com|prod-files-secure\.[^\s/]+\.amazonaws\.com)\/[^\s")>'\]]+/gi,
@@ -40,15 +51,13 @@ const EXTERNAL_PATTERNS = [
   /attachment:[^\s")>'\]]+/gi
 ]
 
-// 生成唯一 key（哈希命名）
 function keyFor(contentType, buf) {
-  const ext = mime.getExtension(contentType) || 'bin'
+  const ext = mimeMod?.getExtension?.(contentType) || 'bin'
   const hash = crypto.createHash('sha1').update(buf).digest('hex')
   return `assets/${hash}.${ext}`
 }
 
-// 检查 R2 是否已有该对象
-async function headExists(key) {
+async function headExists(s3, key) {
   try {
     await s3.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
     return true
@@ -57,8 +66,7 @@ async function headExists(key) {
   }
 }
 
-// 上传对象到 R2
-async function putObject(key, buf, contentType) {
+async function putObject(s3, key, buf, contentType) {
   await s3.send(
     new PutObjectCommand({
       Bucket: R2_BUCKET,
@@ -70,12 +78,18 @@ async function putObject(key, buf, contentType) {
   )
 }
 
-// 拉取图片内容
 async function fetchBuffer(url) {
-  const res = await request(url, { maxRedirections: 3 })
-  if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
-  const buf = Buffer.from(await res.body.arrayBuffer())
-  const ct = res.headers['content-type'] || 'application/octet-stream'
+  if (requestFn) {
+    const res = await requestFn(url, { maxRedirections: 3 })
+    if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
+    const buf = Buffer.from(await res.body.arrayBuffer())
+    const ct = res.headers['content-type'] || 'application/octet-stream'
+    return { buf, ct }
+  }
+  const res = await fetch(url, { redirect: 'follow' })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  const buf = Buffer.from(await res.arrayBuffer())
+  const ct = res.headers.get('content-type') || 'application/octet-stream'
   return { buf, ct }
 }
 
@@ -104,20 +118,18 @@ function normalizeSource(src, table, id) {
   return src
 }
 
-// 迁移单个 URL
-async function migrateUrl(u) {
+async function migrateUrl(s3, u) {
   const { buf, ct } = await fetchBuffer(u)
   const key = keyFor(ct, buf)
-  if (!(await headExists(key))) {
-    await putObject(key, buf, ct)
+  if (!(await headExists(s3, key))) {
+    await putObject(s3, key, buf, ct)
   }
   return `${R2_PUBLIC_BASE}/${key}`
 }
 
-// 收集最近 N 篇文章的所有块，返回 blockMap 列表
 async function getRecentPostBlockMaps(limit = 30) {
   const from = 'api-migrate-images'
-  const props = await getGlobalData({ from })
+  const props = await fetchGlobalAllData({ from })
   const posts = (props?.allPages || [])
     .filter(p => p.type === 'Post' && p.status === 'Published')
     .sort(
@@ -166,8 +178,11 @@ function collectUrlsFromObject(obj, patterns) {
 }
 
 export default async function handler(req, res) {
+  const s3 = getS3()
+  if (!s3) {
+    return res.status(501).json({ ok: false, error: 'R2 not configured' })
+  }
   try {
-    // 可选的安全校验：若配置了 MIGRATE_CRON_KEY，则要求 Header/Query 携带
     const requiredKey = process.env.MIGRATE_CRON_KEY
     if (requiredKey) {
       const hdrAuth = (req.headers['authorization'] || '').toString()
@@ -201,13 +216,13 @@ export default async function handler(req, res) {
         collected.forEach(u => urls.add(normalizeSource(u, 'block', v?.id)))
       })
 
-      const limiter = pLimit(5)
+      const limiter = pLimit ? pLimit(5) : fn => fn()
       const mapOldToNew = new Map()
       await Promise.all(
         Array.from(urls).map(u =>
           limiter(async () => {
             try {
-              const n = await migrateUrl(u)
+              const n = await migrateUrl(s3, u)
               mapOldToNew.set(u, n)
             } catch (e) {
               console.error('migrate failed:', u, e?.message || e)

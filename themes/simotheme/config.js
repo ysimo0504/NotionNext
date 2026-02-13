@@ -1,5 +1,3 @@
-import { CONTACT_XIAOHONGSHU } from 'conf/contact.config'
-
 /**
  * 另一个落地页主题
  */

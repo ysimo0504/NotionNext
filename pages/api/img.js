@@ -1,13 +1,25 @@
-import {
-  S3Client,
-  PutObjectCommand,
-  HeadObjectCommand
-} from '@aws-sdk/client-s3'
-import { request } from 'undici'
 import BLOG from '@/blog.config'
 import crypto from 'crypto'
-import mime from 'mime'
-import sharp from 'sharp'
+
+let S3Client, PutObjectCommand, HeadObjectCommand, requestFn, mimeMod, sharpMod
+
+try {
+  // eslint-disable-next-line
+  const s3Mod = eval("require('@aws-sdk/client-s3')")
+  S3Client = s3Mod.S3Client
+  PutObjectCommand = s3Mod.PutObjectCommand
+  HeadObjectCommand = s3Mod.HeadObjectCommand
+} catch {}
+
+try {
+  // eslint-disable-next-line
+  requestFn = eval("require('undici')").request
+} catch {}
+
+try {
+  // eslint-disable-next-line
+  mimeMod = eval("require('mime')")
+} catch {}
 
 const {
   R2_ACCOUNT_ID,
@@ -17,23 +29,26 @@ const {
   R2_PUBLIC_BASE
 } = process.env
 
-const s3 = new S3Client({
-  region: 'auto',
-  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: R2_ACCESS_KEY_ID,
-    secretAccessKey: R2_SECRET_ACCESS_KEY
-  },
-  forcePathStyle: true
-})
+function getS3() {
+  if (!S3Client || !R2_ACCOUNT_ID) return null
+  return new S3Client({
+    region: 'auto',
+    endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: R2_ACCESS_KEY_ID,
+      secretAccessKey: R2_SECRET_ACCESS_KEY
+    },
+    forcePathStyle: true
+  })
+}
 
 function keyFor(contentType, buf) {
-  const ext = mime.getExtension(contentType) || 'bin'
+  const ext = mimeMod?.getExtension?.(contentType) || 'bin'
   const hash = crypto.createHash('sha1').update(buf).digest('hex')
   return `assets/${hash}.${ext}`
 }
 
-async function headExists(key) {
+async function headExists(s3, key) {
   try {
     await s3.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
     return true
@@ -42,7 +57,7 @@ async function headExists(key) {
   }
 }
 
-async function putObject(key, buf, contentType) {
+async function putObject(s3, key, buf, contentType) {
   await s3.send(
     new PutObjectCommand({
       Bucket: R2_BUCKET,
@@ -55,12 +70,17 @@ async function putObject(key, buf, contentType) {
 }
 
 async function fetchBuffer(url) {
-  const res = await request(url, {
-    maxRedirections: 3
-  })
-  if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
-  const buf = Buffer.from(await res.body.arrayBuffer())
-  const ct = res.headers['content-type'] || 'application/octet-stream'
+  if (requestFn) {
+    const res = await requestFn(url, { maxRedirections: 3 })
+    if (res.statusCode >= 400) throw new Error(`HTTP ${res.statusCode}`)
+    const buf = Buffer.from(await res.body.arrayBuffer())
+    const ct = res.headers['content-type'] || 'application/octet-stream'
+    return { buf, ct }
+  }
+  const res = await fetch(url, { redirect: 'follow' })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  const buf = Buffer.from(await res.arrayBuffer())
+  const ct = res.headers.get('content-type') || 'application/octet-stream'
   return { buf, ct }
 }
 
@@ -71,15 +91,21 @@ const TARGET_FORMAT = (process.env.R2_IMAGE_FORMAT || 'webp').toLowerCase()
 
 async function compressIfNeeded(buf, ct) {
   try {
+    // eslint-disable-next-line
+    if (!sharpMod) sharpMod = eval("require('sharp')")
+  } catch {
+    return { buf, ct }
+  }
+  try {
     if (!ct || !buf) return { buf, ct }
     if (ct.includes('svg') || ct.includes('gif')) return { buf, ct }
-    const img = sharp(buf, { animated: false })
+    const img = sharpMod(buf, { animated: false })
     const meta = await img.metadata()
     if (!meta) return { buf, ct }
     const width = meta.width || MAX_WIDTH
     const height = meta.height || MAX_HEIGHT
     const needResize = width > MAX_WIDTH || height > MAX_HEIGHT
-    let pipeline = sharp(buf, { animated: false }).rotate()
+    let pipeline = sharpMod(buf, { animated: false }).rotate()
     if (needResize) {
       pipeline = pipeline.resize({
         width: Math.min(width, MAX_WIDTH),
@@ -108,17 +134,14 @@ async function compressIfNeeded(buf, ct) {
 }
 
 function normalizeSource(src, table, id) {
-  // 处理 Notion attachment: 协议 与 未签名资源
   if (!src) return src
   if (src.startsWith('attachment:')) {
-    // 交给 notion 的 /image 签名服务
     const base = `${BLOG.NOTION_HOST}/image/` + encodeURIComponent(src)
     const search = new URLSearchParams()
     if (table) search.set('table', table)
     if (id) search.set('id', id)
     return `${base}?${search.toString()}`
   }
-  // 旧图床（amazonaws 或 secure），也走 notion 签名，以保证可访问
   try {
     const u = new URL(src)
     if (
@@ -136,6 +159,10 @@ function normalizeSource(src, table, id) {
 }
 
 export default async function handler(req, res) {
+  const s3 = getS3()
+  if (!s3) {
+    return res.status(501).json({ ok: false, error: 'R2 not configured' })
+  }
   try {
     const src = req.query.src
     const table = req.query.table
@@ -145,8 +172,8 @@ export default async function handler(req, res) {
     const fetched = await fetchBuffer(normalized)
     const compressed = await compressIfNeeded(fetched.buf, fetched.ct)
     const key = keyFor(compressed.ct, compressed.buf)
-    if (!(await headExists(key))) {
-      await putObject(key, compressed.buf, compressed.ct)
+    if (!(await headExists(s3, key))) {
+      await putObject(s3, key, compressed.buf, compressed.ct)
     }
     const target = `${R2_PUBLIC_BASE}/${key}`
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')

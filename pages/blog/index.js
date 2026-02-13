@@ -1,6 +1,6 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
-import { getGlobalData } from '@/lib/db/getSiteData'
+import { fetchGlobalAllData } from '@/lib/db/SiteDataApi'
 import { DynamicLayout } from '@/themes/theme'
 
 /**
@@ -14,7 +14,7 @@ const BlogIndex = props => {
 }
 
 export async function getStaticProps({ locale }) {
-  const props = await getGlobalData({ from: 'blog-index', locale })
+  const props = await fetchGlobalAllData({ from: 'blog-index', locale })
 
   // 处理文章列表
   props.posts = props.allPages?.filter(
