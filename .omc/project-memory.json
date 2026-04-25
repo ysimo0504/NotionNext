@@ -299,6 +299,12 @@
   },
   "hotPaths": [
     {
+      "path": "themes/simotheme/components/Hero.js",
+      "accessCount": 12,
+      "lastAccessed": 1777124309314,
+      "type": "file"
+    },
+    {
       "path": "components/SEO.js",
       "accessCount": 6,
       "lastAccessed": 1777122020262,
@@ -314,12 +320,6 @@
       "path": "pages/_app.js",
       "accessCount": 3,
       "lastAccessed": 1777123109555,
-      "type": "file"
-    },
-    {
-      "path": "themes/simotheme/components/Hero.js",
-      "accessCount": 3,
-      "lastAccessed": 1777123224366,
       "type": "file"
     },
     {

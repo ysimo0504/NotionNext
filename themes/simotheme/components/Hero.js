@@ -179,6 +179,53 @@ export const Hero = props => {
                       </div>
                     </Link>
                   )}
+
+                  {/* Blog 卡片 */}
+                  <Link
+                    href='/archive'
+                    className='group sm:col-span-2 p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'
+                  >
+                    <div className='flex items-start space-x-4'>
+                      <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300'>
+                        <svg
+                          className='w-6 h-6 text-gray-700'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+                          />
+                        </svg>
+                      </div>
+                      <div className='flex-1'>
+                        <h3 className='text-lg font-semibold text-black mb-2 group-hover:text-gray-800 transition-colors'>
+                          My Blog
+                        </h3>
+                        <div className='flex items-center justify-end text-xs text-gray-500'>
+                          <span className='inline-flex items-center'>
+                            View Posts
+                            <svg
+                              className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
+                              fill='none'
+                              stroke='currentColor'
+                              viewBox='0 0 24 24'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth={2}
+                                d='M9 5l7 7-7 7'
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
 
                 {/* 社交媒体图标 */}
@@ -201,7 +248,8 @@ export const Hero = props => {
                     width={378}
                     height={666}
                     priority
-                    className='w-full h-auto object-contain'
+                    className='object-contain'
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
               </div>
