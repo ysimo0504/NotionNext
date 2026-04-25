@@ -1,4 +1,3 @@
-import { fetchNotionPageBlocks } from '@/lib/db/notion/getPostBlocks'
 import { normalizeNotionMetadata } from '@/lib/db/notion/normalizeUtil'
 import notionAPI from '@/lib/db/notion/getNotionAPI'
 import { idToUuid } from 'notion-utils'
@@ -8,7 +7,9 @@ export default async function handler(req, res) {
   try {
     const pageId = BLOG.NOTION_PAGE_ID
     const uuid = idToUuid(pageId)
-    const recordMap = await fetchNotionPageBlocks(pageId, 'debug')
+
+    // Call getPage DIRECTLY (no cache) to test if collection_query is populated after fix
+    const recordMap = await notionAPI.getPage(pageId)
 
     const block = recordMap?.block || {}
     const rawMetadata = normalizeNotionMetadata(block, uuid)
@@ -18,6 +19,8 @@ export default async function handler(req, res) {
     const viewIds = rawMetadata?.view_ids || []
 
     const cqKeys = Object.keys(collectionQuery)
+    const cqCollectionKeys =
+      cqKeys.length > 0 ? Object.keys(collectionQuery[cqKeys[0]] || {}) : []
 
     // Try to directly call queryCollection for the first view
     let directCallResult = null
@@ -26,22 +29,28 @@ export default async function handler(req, res) {
       const viewId = viewIds[0]
       const cvValue = collectionView[viewId]?.value || collectionView[viewId]
       try {
-        const result = await notionAPI.__call('getCollectionData',
+        const result = await notionAPI.__call(
+          'getCollectionData',
           collectionId,
           viewId,
           cvValue,
           { limit: 10 }
         )
         directCallResult = {
-          resultKeys: result?.result ? Object.keys(result.result) : null,
-          reducerResultsKeys: result?.result?.reducerResults ? Object.keys(result.result.reducerResults) : null,
+          reducerResultsKeys: result?.result?.reducerResults
+            ? Object.keys(result.result.reducerResults)
+            : null,
           firstReducerValue: result?.result?.reducerResults
             ? Object.values(result.result.reducerResults)[0]
             : null,
-          recordMapBlockCount: Object.keys(result?.recordMap?.block || {}).length
+          recordMapBlockCount: Object.keys(result?.recordMap?.block || {})
+            .length
         }
       } catch (e) {
-        directCallError = e.message + ' | ' + (e.data ? JSON.stringify(e.data).substring(0, 200) : '')
+        directCallError =
+          e.message +
+          ' | ' +
+          (e.data ? JSON.stringify(e.data).substring(0, 200) : '')
       }
     }
 
@@ -52,12 +61,15 @@ export default async function handler(req, res) {
       collectionId,
       viewIds,
       cqKeys,
+      cqCollectionKeys,
       cqIsEmpty: cqKeys.length === 0,
       directCallResult,
       directCallError,
-      rawMetadataType: rawMetadata?.type,
+      rawMetadataType: rawMetadata?.type
     })
   } catch (e) {
-    res.status(500).json({ error: e.message, stack: e.stack?.substring(0, 500) })
+    res
+      .status(500)
+      .json({ error: e.message, stack: e.stack?.substring(0, 500) })
   }
 }
