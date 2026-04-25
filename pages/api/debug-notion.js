@@ -12,54 +12,56 @@ export default async function handler(req, res) {
     const block = recordMap?.block || {}
     const rawMetadata = normalizeNotionMetadata(block, uuid)
     const collectionId = rawMetadata?.collection_id
+    const collectionIdUuid = idToUuid(collectionId)
     const collectionQuery = recordMap?.collection_query || {}
     const viewIds = rawMetadata?.view_ids || []
 
     const cqKeys = Object.keys(collectionQuery)
-    const hasCollectionId = cqKeys.includes(collectionId)
-    const hasUuidCollectionId = cqKeys.includes(idToUuid(collectionId))
+    const cqData =
+      collectionQuery[collectionId] ||
+      collectionQuery[collectionIdUuid] ||
+      {}
+    const cqDataKeys = Object.keys(cqData)
 
     const viewSample = {}
-    const cqTarget = collectionQuery[collectionId] || collectionQuery[idToUuid(collectionId)]
-    if (cqTarget) {
-      const viewId = viewIds[0]
-      const view = cqTarget[viewId]
-      if (view) {
-        viewSample.hasBlockIds = Array.isArray(view.blockIds)
-        viewSample.blockIdsCount = view.blockIds?.length
-        viewSample.hasCollectionGroupResults = !!view.collection_group_results
-        const cgr = view.collection_group_results
-        viewSample.cgrKeys = cgr ? Object.keys(cgr) : []
-        viewSample.cgrHasBlockIds = Array.isArray(cgr?.blockIds)
-        viewSample.cgrBlockIdsCount = cgr?.blockIds?.length
-        viewSample.cgrHasResults = Array.isArray(cgr?.results)
-        viewSample.cgrResultsCount = cgr?.results?.length
-        if (cgr?.results?.length > 0) {
-          viewSample.firstResultKeys = Object.keys(cgr.results[0])
-          viewSample.firstResultBlockIdsCount = cgr.results[0]?.blockIds?.length
+    const firstViewId = viewIds[0]
+    if (firstViewId && cqData[firstViewId]) {
+      const view = cqData[firstViewId]
+      viewSample.viewKeys = Object.keys(view)
+      viewSample.hasBlockIds = Array.isArray(view.blockIds)
+      viewSample.blockIdsCount = view.blockIds?.length
+      const cgr = view.collection_group_results
+      viewSample.hasCGR = !!cgr
+      if (cgr) {
+        viewSample.cgrKeys = Object.keys(cgr)
+        viewSample.cgrHasBlockIds = Array.isArray(cgr.blockIds)
+        viewSample.cgrBlockIdsCount = cgr.blockIds?.length
+        viewSample.cgrHasResults = Array.isArray(cgr.results)
+        viewSample.cgrResultsCount = cgr.results?.length
+        if (cgr.results?.[0]) {
+          viewSample.firstGroupKeys = Object.keys(cgr.results[0])
+          viewSample.firstGroupBlockIdsCount = cgr.results[0].blockIds?.length
         }
-      } else {
-        viewSample.viewIds = viewIds
-        viewSample.cqTargetKeys = Object.keys(cqTarget)
-        viewSample.note = 'viewId not found in cqTarget'
       }
-    } else {
-      viewSample.note = 'collectionId not found in collectionQuery'
+    } else if (firstViewId) {
+      viewSample.note = `viewId ${firstViewId} not found. cqData keys: ${cqDataKeys.slice(0, 3).join(', ')}`
     }
 
+    res.setHeader('Content-Type', 'application/json')
     res.json({
       pageId,
       uuid,
       collectionId,
-      collectionIdUuid: idToUuid(collectionId),
+      collectionIdUuid,
+      cqKeys: cqKeys.slice(0, 5),
+      cqKeyMatchesCollectionId: cqKeys.includes(collectionId),
+      cqKeyMatchesUuid: cqKeys.includes(collectionIdUuid),
       viewIds,
-      cqKeys,
-      hasCollectionId,
-      hasUuidCollectionId,
+      cqDataKeys: cqDataKeys.slice(0, 5),
       viewSample,
       rawMetadataType: rawMetadata?.type,
     })
   } catch (e) {
-    res.status(500).json({ error: e.message, stack: e.stack })
+    res.status(500).json({ error: e.message })
   }
 }
