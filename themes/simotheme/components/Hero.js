@@ -1,7 +1,6 @@
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
-import Image from 'next/image'
 import Link from 'next/link'
 import SocialButton from './SocialButton'
 
@@ -242,14 +241,11 @@ export const Hero = props => {
             <div className='w-full lg:w-auto order-1  lg:order-2 mb-8 lg:mb-0'>
               <div className='flex justify-center px-4 lg:px-0'>
                 <div className='max-w-[150px] sm:max-w-[250px] lg:max-w-[350px] w-full'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src='/images/Illustration.png'
                     alt='Illustration'
-                    width={378}
-                    height={666}
-                    priority
-                    className='object-contain'
-                    style={{ width: '100%', height: 'auto' }}
+                    className='w-full h-auto object-contain'
                   />
                 </div>
               </div>

@@ -103,7 +103,8 @@ const LayoutBase = props => {
   return (
     <div
       id='theme-simo'
-      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}>
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col bg-white scroll-smooth`}
+    >
       <Style />
       {/* 页头 - 固定高度 */}
       <Header {...props} />
@@ -111,7 +112,8 @@ const LayoutBase = props => {
       {/* 主内容区域 - 占据剩余空间 */}
       <div
         id='main-wrapper'
-        className={isHomePage ? 'flex-1 flex items-center' : 'grow'}>
+        className={isHomePage ? 'flex-1 flex items-center' : 'grow'}
+      >
         {children}
       </div>
 
@@ -148,20 +150,6 @@ const LayoutIndex = props => {
 const LayoutSlug = props => {
   const { post, lock, validPassword, allPages } = props
 
-  // 客户端调试信息
-  console.log('🎨 LayoutSlug 调试信息:')
-  console.log('  post:', post)
-  console.log('  allPages 数量:', allPages?.length)
-  console.log(
-    '  所有文章 slugs:',
-    allPages?.map(p => p.slug)
-  )
-  console.log(
-    '  Post 类型文章:',
-    allPages
-      ?.filter(p => p.type === 'Post')
-      ?.map(p => ({ slug: p.slug, title: p.title }))
-  )
   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
   const router = useRouter()
   if (
@@ -297,7 +285,8 @@ const Layout404 = props => {
                 </p>
                 <Link
                   href='/'
-                  className='py-3 text-base font-medium text-white transition rounded-md bg-dark px-7 hover:bg-primary'>
+                  className='py-3 text-base font-medium text-white transition rounded-md bg-dark px-7 hover:bg-primary'
+                >
                   {siteConfig('STARTER_404_BACK')}
                 </Link>
               </div>
