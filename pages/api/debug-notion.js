@@ -1,5 +1,6 @@
 import { normalizeNotionMetadata } from '@/lib/db/notion/normalizeUtil'
 import notionAPI from '@/lib/db/notion/getNotionAPI'
+import { getSiteDataByPageId } from '@/lib/db/SiteDataApi'
 import { idToUuid } from 'notion-utils'
 import BLOG from '@/blog.config'
 
@@ -8,9 +9,8 @@ export default async function handler(req, res) {
     const pageId = BLOG.NOTION_PAGE_ID
     const uuid = idToUuid(pageId)
 
-    // Call getPage DIRECTLY (no cache) to test if collection_query is populated after fix
+    // Test getPage directly (no cache)
     const recordMap = await notionAPI.getPage(pageId)
-
     const block = recordMap?.block || {}
     const rawMetadata = normalizeNotionMetadata(block, uuid)
     const collectionId = rawMetadata?.collection_id
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const cqCollectionKeys =
       cqKeys.length > 0 ? Object.keys(collectionQuery[cqKeys[0]] || {}) : []
 
-    // Try to directly call queryCollection for the first view
+    // Test direct getCollectionData call
     let directCallResult = null
     let directCallError = null
     if (viewIds.length > 0) {
@@ -43,14 +43,39 @@ export default async function handler(req, res) {
           firstReducerValue: result?.result?.reducerResults
             ? Object.values(result.result.reducerResults)[0]
             : null,
-          recordMapBlockCount: Object.keys(result?.recordMap?.block || {})
-            .length
+          recordMapBlockCount: Object.keys(result?.recordMap?.block || {}).length
         }
       } catch (e) {
         directCallError =
           e.message +
           ' | ' +
           (e.data ? JSON.stringify(e.data).substring(0, 200) : '')
+      }
+    }
+
+    // Test full site data pipeline (includes fallback fix)
+    let siteDataTest = null
+    let siteDataError = null
+    try {
+      const siteData = await getSiteDataByPageId({ pageId, from: 'debug' })
+      siteDataTest = {
+        postCount: siteData?.allPages?.length ?? 0,
+        allNavPagesCount: siteData?.allNavPages?.length ?? 0,
+        siteInfoTitle: siteData?.siteInfo?.title
+      }
+    } catch (e) {
+      siteDataError = e.message
+    }
+
+    // Force ISR revalidation for key pages
+    const revalidated = []
+    const revalidateErrors = []
+    for (const path of ['/apps', '/templates', '/archive', '/']) {
+      try {
+        await res.revalidate(path)
+        revalidated.push(path)
+      } catch (e) {
+        revalidateErrors.push({ path, error: e.message })
       }
     }
 
@@ -65,6 +90,10 @@ export default async function handler(req, res) {
       cqIsEmpty: cqKeys.length === 0,
       directCallResult,
       directCallError,
+      siteDataTest,
+      siteDataError,
+      revalidated,
+      revalidateErrors,
       rawMetadataType: rawMetadata?.type
     })
   } catch (e) {
