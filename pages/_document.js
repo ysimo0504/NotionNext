@@ -38,7 +38,6 @@ class MyDocument extends Document {
           />
 
           {/* DNS预解析 */}
-          <link rel='dns-prefetch' href='//fonts.googleapis.com' />
           <link rel='dns-prefetch' href='//www.google-analytics.com' />
           <link rel='dns-prefetch' href='//www.googletagmanager.com' />
 

@@ -24,17 +24,31 @@ const SEO = props => {
   useEffect(() => {
     // 使用WebFontLoader字体加载
     if (webFontUrl) {
+      // 中国用户时区列表，使用国内镜像替换 Google Fonts 避免被墙
+      const chinaTz = [
+        'Asia/Shanghai',
+        'Asia/Chongqing',
+        'Asia/Harbin',
+        'Asia/Urumqi'
+      ]
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+      const isChina = chinaTz.includes(tz)
+      const resolvedUrls = isChina
+        ? webFontUrl.map(url =>
+            url.replace('fonts.googleapis.com', 'fonts.loli.net')
+          )
+        : webFontUrl
+
       loadExternalResource(
         'https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js',
         'js'
       ).then(url => {
         const WebFont = window?.WebFont
         if (WebFont) {
-          // console.log('LoadWebFont', webFontUrl)
           WebFont.load({
             custom: {
               // families: ['"LXGW WenKai"'],
-              urls: webFontUrl
+              urls: resolvedUrls
             }
           })
         }
@@ -270,15 +284,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }}
       />
 
-      {/* DNS预取和预连接 */}
-      <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+      {/* DNS预取 - 移除 gstatic preconnect，避免中国网络连接被墙域名超时 */}
       <link rel='dns-prefetch' href='//www.google-analytics.com' />
       <link rel='dns-prefetch' href='//www.googletagmanager.com' />
-      <link
-        rel='preconnect'
-        href='https://fonts.gstatic.com'
-        crossOrigin='anonymous'
-      />
 
       {/* 预加载关键资源 */}
       <link

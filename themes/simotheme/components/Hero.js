@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
+import Image from 'next/image'
 import Link from 'next/link'
 import SocialButton from './SocialButton'
 
@@ -53,7 +53,8 @@ export const Hero = props => {
       {/* <!-- ====== Hero Section Start --> */}
       <div
         id='home'
-        className='relative  overflow-hidden h-full w-full flex  items-center justify-center pt-16'>
+        className='relative  overflow-hidden h-full w-full flex  items-center justify-center pt-16'
+      >
         <div className='w-full flex justify-center'>
           <div className='flex flex-wrap items-center justify-center w-full max-w-6xl mx-auto px-6'>
             {/* 左侧内容区域 */}
@@ -75,7 +76,8 @@ export const Hero = props => {
                   {STARTER_HERO_BUTTON_1_TEXT && (
                     <Link
                       href={STARTER_HERO_BUTTON_1_URL}
-                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-black hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
+                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-black hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'
+                    >
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
                         <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300'>
@@ -83,7 +85,8 @@ export const Hero = props => {
                             className='w-6 h-6 text-gray-700'
                             fill='none'
                             stroke='currentColor'
-                            viewBox='0 0 24 24'>
+                            viewBox='0 0 24 24'
+                          >
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'
@@ -107,7 +110,8 @@ export const Hero = props => {
                                 className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
                                 fill='none'
                                 stroke='currentColor'
-                                viewBox='0 0 24 24'>
+                                viewBox='0 0 24 24'
+                              >
                                 <path
                                   strokeLinecap='round'
                                   strokeLinejoin='round'
@@ -126,7 +130,8 @@ export const Hero = props => {
                   {STARTER_HERO_BUTTON_2_TEXT && (
                     <Link
                       href={STARTER_HERO_BUTTON_2_URL}
-                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'>
+                      className='group p-6 bg-white border-2 border-gray-100 rounded-xl hover:border-gray-400 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1'
+                    >
                       <div className='flex items-start space-x-4'>
                         {/* 图标区域 */}
                         <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300'>
@@ -134,7 +139,8 @@ export const Hero = props => {
                             className='w-6 h-6 text-gray-700'
                             fill='none'
                             stroke='currentColor'
-                            viewBox='0 0 24 24'>
+                            viewBox='0 0 24 24'
+                          >
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'
@@ -158,7 +164,8 @@ export const Hero = props => {
                                 className='w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform'
                                 fill='none'
                                 stroke='currentColor'
-                                viewBox='0 0 24 24'>
+                                viewBox='0 0 24 24'
+                              >
                                 <path
                                   strokeLinecap='round'
                                   strokeLinejoin='round'
@@ -188,9 +195,12 @@ export const Hero = props => {
             <div className='w-full lg:w-auto order-1  lg:order-2 mb-8 lg:mb-0'>
               <div className='flex justify-center px-4 lg:px-0'>
                 <div className='max-w-[150px] sm:max-w-[250px] lg:max-w-[350px] w-full'>
-                  <img
+                  <Image
                     src='/images/Illustration.png'
                     alt='Illustration'
+                    width={378}
+                    height={666}
+                    priority
                     className='w-full h-auto object-contain'
                   />
                 </div>

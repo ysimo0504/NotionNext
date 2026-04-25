@@ -1,0 +1,351 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1777120416618,
+  "projectRoot": "/Users/yanghe/Code/NotionNext",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=20",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      },
+      {
+        "name": "JavaScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "jsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "14.2.30",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "18.3.1",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "18.3.1",
+        "category": "frontend"
+      },
+      {
+        "name": "jest",
+        "version": "29.7.0",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "pnpm",
+    "runtime": "Node.js 20"
+  },
+  "build": {
+    "buildCommand": "pnpm build",
+    "testCommand": "pnpm test",
+    "lintCommand": "pnpm lint",
+    "devCommand": "pnpm dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "cross-env BUILD_MODE=true next build",
+      "start": "next start",
+      "post-build": "next-sitemap --config next-sitemap.config.js",
+      "export": "cross-env BUILD_MODE=true EXPORT=true next build && next-sitemap --config next-sitemap.config.js",
+      "bundle-report": "cross-env ANALYZE=true next build",
+      "build-all-in-dev": "cross-env VERCEL_ENV=production next build",
+      "version": "echo $npm_package_version",
+      "lint": "next lint",
+      "lint:fix": "next lint --fix",
+      "type-check": "tsc --noEmit",
+      "format": "prettier --write .",
+      "format:check": "prettier --check .",
+      "quality": "node scripts/quality-check.js",
+      "pre-commit": "npm run lint:fix && npm run format && npm run type-check",
+      "dev-tools": "node scripts/dev-tools.js",
+      "init-dev": "node scripts/dev-tools.js init",
+      "clean": "node scripts/dev-tools.js clean",
+      "docs": "node scripts/dev-tools.js docs",
+      "check-updates": "node scripts/dev-tools.js check-updates",
+      "setup-hooks": "node scripts/setup-git-hooks.js install",
+      "remove-hooks": "node scripts/setup-git-hooks.js remove",
+      "check-hooks": "node scripts/setup-git-hooks.js check",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "test:coverage": "jest --coverage",
+      "test:ci": "jest --ci --coverage --watchAll=false",
+      "health-check": "node scripts/health-check.js",
+      "validate": "npm run health-check",
+      "final-validation": "node scripts/final-validation.js"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "__tests__",
+      "components",
+      "docs",
+      "lib",
+      "pages",
+      "public",
+      "scripts"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "__tests__": {
+      "path": "__tests__",
+      "purpose": "Test files",
+      "fileCount": 0,
+      "lastAccessed": 1777120416567,
+      "keyFiles": []
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 92,
+      "lastAccessed": 1777120416567,
+      "keyFiles": [
+        "AISummary.js",
+        "AISummary.module.css",
+        "AOSAnimation.js",
+        "Accessibility.js",
+        "Ackee.js"
+      ]
+    },
+    "conf": {
+      "path": "conf",
+      "purpose": null,
+      "fileCount": 17,
+      "lastAccessed": 1777120416596,
+      "keyFiles": [
+        "ad.config.js",
+        "ai.confg.js",
+        "analytics.config.js",
+        "animation.config.js",
+        "code.config.js"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 4,
+      "lastAccessed": 1777120416596,
+      "keyFiles": [
+        "theme-fukasawa.png",
+        "theme-hexo.png",
+        "theme-medium.png",
+        "theme-next.png"
+      ]
+    },
+    "hooks": {
+      "path": "hooks",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1777120416596,
+      "keyFiles": [
+        "useAdjustStyle.js",
+        "useWindowSize.ts"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 3,
+      "lastAccessed": 1777120416598,
+      "keyFiles": [
+        "config.js",
+        "global.js"
+      ]
+    },
+    "pages": {
+      "path": "pages",
+      "purpose": "Page components",
+      "fileCount": 8,
+      "lastAccessed": 1777120416598,
+      "keyFiles": [
+        "404.js",
+        "500.js",
+        "_app.js",
+        "_document.js",
+        "_error.js"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 9,
+      "lastAccessed": 1777120416599,
+      "keyFiles": [
+        "ads.txt",
+        "apple-touch-icon.png",
+        "avatar.png",
+        "avatar.svg",
+        "dplayer.htm"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 5,
+      "lastAccessed": 1777120416602,
+      "keyFiles": [
+        "dev-tools.js",
+        "final-validation.js",
+        "health-check.js",
+        "quality-check.js",
+        "setup-git-hooks.js"
+      ]
+    },
+    "styles": {
+      "path": "styles",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1777120416602,
+      "keyFiles": [
+        "globals.css",
+        "notion.css",
+        "prism-theme.css",
+        "utility-patterns.css"
+      ]
+    },
+    "themes": {
+      "path": "themes",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1777120416602,
+      "keyFiles": [
+        "theme.js"
+      ]
+    },
+    "types": {
+      "path": "types",
+      "purpose": "Type definitions",
+      "fileCount": 1,
+      "lastAccessed": 1777120416603,
+      "keyFiles": [
+        "index.ts"
+      ]
+    },
+    "__tests__/components": {
+      "path": "__tests__/components",
+      "purpose": "UI components",
+      "fileCount": 1,
+      "lastAccessed": 1777120416603,
+      "keyFiles": [
+        "LazyImage.test.js"
+      ]
+    },
+    "__tests__/lib": {
+      "path": "__tests__/lib",
+      "purpose": "Library code",
+      "fileCount": 0,
+      "lastAccessed": 1777120416603,
+      "keyFiles": []
+    },
+    "lib/config": {
+      "path": "lib/config",
+      "purpose": "Configuration files",
+      "fileCount": 1,
+      "lastAccessed": 1777120416609,
+      "keyFiles": [
+        "env-validation.js"
+      ]
+    },
+    "lib/middleware": {
+      "path": "lib/middleware",
+      "purpose": "Middleware",
+      "fileCount": 1,
+      "lastAccessed": 1777120416609,
+      "keyFiles": [
+        "security.js"
+      ]
+    },
+    "pages/api": {
+      "path": "pages/api",
+      "purpose": "API routes",
+      "fileCount": 5,
+      "lastAccessed": 1777120416610,
+      "keyFiles": [
+        "cache.js",
+        "img.js",
+        "migrate-images.js"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "components/SEO.js",
+      "accessCount": 6,
+      "lastAccessed": 1777122020262,
+      "type": "file"
+    },
+    {
+      "path": "conf/font.config.js",
+      "accessCount": 4,
+      "lastAccessed": 1777122000615,
+      "type": "file"
+    },
+    {
+      "path": "pages/_app.js",
+      "accessCount": 3,
+      "lastAccessed": 1777123109555,
+      "type": "file"
+    },
+    {
+      "path": "themes/simotheme/components/Hero.js",
+      "accessCount": 3,
+      "lastAccessed": 1777123224366,
+      "type": "file"
+    },
+    {
+      "path": "pages/_document.js",
+      "accessCount": 2,
+      "lastAccessed": 1777121435218,
+      "type": "file"
+    },
+    {
+      "path": "conf/analytics.config.js",
+      "accessCount": 2,
+      "lastAccessed": 1777123111604,
+      "type": "file"
+    },
+    {
+      "path": "components/ExternalPlugins.js",
+      "accessCount": 1,
+      "lastAccessed": 1777120828633,
+      "type": "file"
+    },
+    {
+      "path": "components/LazyImage.js",
+      "accessCount": 1,
+      "lastAccessed": 1777123194968,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
