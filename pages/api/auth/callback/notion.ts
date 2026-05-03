@@ -105,7 +105,6 @@ const fetchToken = async (code: string): Promise<NotionTokenResponse> => {
         }
       }
     )
-    console.log('OAuth身份信息', response.data)
     return {
       status: response.status,
       statusText: response.statusText,

@@ -79,12 +79,8 @@ interface NotionResponse {
 
 // 处理响应结果
 function responseResult(response: NotionResponse): void {
-  if (response.status === 200) {
-    console.log('成功...')
-    console.log(response.data)
-  } else {
-    console.log('失败...')
-    console.log(response.data)
+  if (response.status !== 200) {
+    console.error('[CustomNotionApi] non-200 response', response.status)
   }
 }
 
